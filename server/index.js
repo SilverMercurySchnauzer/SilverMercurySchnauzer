@@ -1,12 +1,13 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var items = require('../database-mysql');
+// var items = require('../database');
 var twitter = require('../utility/twitter');
 var facebook = require('../utility/facebook');
+const PORT = process.env.PORT || 3000;
 
 var app = express();
 
-app.use(express.static(__dirname + '/../react-client/dist'));
+app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -43,7 +44,7 @@ app.post('/items', (req, res) => {
 // });
 });
 
-app.listen(3000, function() {
-  console.log('listening on port 3000!');
+app.listen(PORT, function() {
+  console.log(`listening on port ${PORT}!`);
 });
 

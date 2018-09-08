@@ -1,10 +1,11 @@
-const config = require('../config');
+// const config = require('../config');
+require('dotenv').config();
 const request = require("request");
 
 const getTweets = (searchTerm, callback ) => {
     const search_auth = {
-        consumer_key: config.APIKEY,
-        consumer_secret: config.APISECRET//,
+        consumer_key: process.env.APIKEY,
+        consumer_secret: process.env.APISECRET//,
       
       }
       
