@@ -4,9 +4,9 @@
 
 ## Team
 
-  - __Product Owner__: Navira
-  - __Scrum Master__: Michael
-  - __Development Team Members__: Jacob, Eric
+  - __Product Owner__: teamMember
+  - __Scrum Master__: teamMember
+  - __Development Team Members__: teamMember, teamMember
 
 ## Table of Contents
 
