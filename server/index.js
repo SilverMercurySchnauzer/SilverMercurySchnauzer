@@ -1,17 +1,18 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var items = require('../database');
-var twitter = require('./twitter')
+var items = require('../database-mysql');
+var twitter = require('../utility/twitter');
+var facebook = require('../utility/facebook');
 
 var app = express();
 
-app.use(express.static(__dirname + '/../client/dist'));
+app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.get('/items', function (req, res) {
+app.get('/items', (req, res) => {
   items.selectAll(function(err, data) {
-    console.log('data from db in server-->', data)
+    console.log('data from db to server-->', data)
     if(err) {
       res.sendStatus(500);
     } else {
@@ -21,8 +22,8 @@ app.get('/items', function (req, res) {
 });
 
 
-app.post('/items', function (req, res) {
-  var searchTerm = req.body.term;
+app.post('/items', (req, res) => {
+  const searchTerm = req.body.term;
 //   twitter.getTweets(searchTerm, function(err, response) {
 //     response.forEach(tweet => {
 //       date = tweet.createdAt;
