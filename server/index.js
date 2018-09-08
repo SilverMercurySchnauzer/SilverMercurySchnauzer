@@ -12,14 +12,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/items', (req, res) => {
-  items.selectAll(function(err, data) {
-    console.log('data from db to server-->', data)
-    if(err) {
-      res.sendStatus(500);
-    } else {
-      res.json(data);
-    }
-  });
+  // items.selectAll(function(err, data) {
+  //   console.log('data from db to server-->', data)
+  //   if(err) {
+  //     res.sendStatus(500);
+  //   } else {
+  //     res.json(data);
+  //   }
+  // });
 });
 
 
