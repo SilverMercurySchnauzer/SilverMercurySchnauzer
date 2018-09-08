@@ -1,7 +1,6 @@
 # Contributing/Git Workflow
 
 ## Team Workflow
-0. Fork organization's repository to your personal github
 1. git checkout development
 2. git pull --rebase upstream development
 3. git checkout -b feature-branch
@@ -14,6 +13,7 @@
 4A. Make changes
 4B. Git add -> git commit
 5. git pull --rebase upstream development
+5.5. git rebase --continue
 6. git push origin feature-branch
   EX: git push origin feat/oathFacebook
 7. Submit pull request
