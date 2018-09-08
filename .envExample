@@ -1,5 +1,7 @@
 APIKEY=
 APISECRET=
+SSL=false
+DATABASE_URL=postgres://user:password@hostwithport/database
 tw_consumer_key=
 tw_consumer_secret=
 tw_token=
