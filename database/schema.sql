@@ -33,4 +33,3 @@ ALTER TABLE tokens ADD CONSTRAINT posts_fk0 FOREIGN KEY (user_id) REFERENCES use
  *    heroku pg:psql -f database/schema.sql
  *  to create the tables.
 */
-
