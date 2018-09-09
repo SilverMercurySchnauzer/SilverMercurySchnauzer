@@ -8,16 +8,16 @@ GET   -->   /api/items
 POST  -->   /api/items
 =======================================
 
-GET   -->   /signup
-POST  -->   /signup
-GET   -->   /login
-POST  -->   /login
-GET   -->   /oauth
-GET   -->   /oauth/twitter
-GET   -->   /oauth/facebook
-POST  -->   /oauth/twitter/authenticatedCallback
-POST  -->   /oauth/facebook/authenticatedCallback
-GET   -->   /home
-GET   -->   /createPost
-POST  -->   /createPost/publish
-POST  -->   /createPost/save
+GET   -->   /api/signup
+POST  -->   /api/signup
+GET   -->   /api/login
+POST  -->   /api/login
+GET   -->   /api/oauth
+GET   -->   /api/oauth/twitter
+GET   -->   /api/oauth/facebook
+POST  -->   /api/oauth/twitter/authenticatedCallback
+POST  -->   /api/oauth/facebook/authenticatedCallback
+GET   -->   /api/home
+GET   -->   /api/createPost
+POST  -->   /api/createPost/publish
+POST  -->   /api/createPost/save

@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const oauth = require('./oauth.js');
+const authenticate = require('./authenticate.js');
 const createPost = require('./createPost.js');
 const db = require('../../database');
 const twitter = require('../../utility/twitter');
 const facebook = require('../../utility/facebook');
 
-router.use('/createPost', createPost);
-router.use('/oauth', oauth);
+router.use('/createpost', createPost);
+router.use('/', authenticate);
 
 router.get('/', (req, res) => {
   res.status(200).json({message: 'connected / GET'});
@@ -48,7 +48,7 @@ router.post('/items', (req, res) => {
 });
 
 router.get('/home', (req, res) => {
-  
+    res.status(200).json({message: 'connected /api/home GET'});
 });
 
 module.exports = router;
