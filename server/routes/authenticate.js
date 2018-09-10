@@ -28,4 +28,10 @@ router.post('/signup', (req, res) => {
   });
 });
 
+router.post('/logout', (req, res) => {
+  res.status(200).json({
+    message: 'connected /api/logout POST'
+  });
+});
+
 module.exports = router;

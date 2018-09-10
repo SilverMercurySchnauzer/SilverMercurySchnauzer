@@ -12,6 +12,7 @@ GET   -->   /api/signup
 POST  -->   /api/signup
 GET   -->   /api/login
 POST  -->   /api/login
+POST  -->   /api/logout
 GET   -->   /api/oauth
 GET   -->   /api/oauth/twitter
 GET   -->   /api/oauth/facebook
