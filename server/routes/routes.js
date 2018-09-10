@@ -51,4 +51,8 @@ router.get('/home', (req, res) => {
     res.status(200).json({message: 'connected /api/home GET'});
 });
 
+router.get('/drafts', (req, res) => {
+  res.status(200).json({message: 'connected /api/drafts GET'});
+});
+
 module.exports = router;

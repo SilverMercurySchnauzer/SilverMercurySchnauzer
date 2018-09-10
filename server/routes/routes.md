@@ -19,6 +19,7 @@ GET   -->   /api/oauth/facebook
 POST  -->   /api/oauth/twitter/authenticatedCallback
 POST  -->   /api/oauth/facebook/authenticatedCallback
 GET   -->   /api/home
+GET   -->   /api/drafts
 GET   -->   /api/createPost
 POST  -->   /api/createPost/publish
 POST  -->   /api/createPost/save
