@@ -6,7 +6,7 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import HomeIcon from '@material-ui/icons/Home';
 import CreateIcon from '@material-ui/icons/Create';
 import LogoutIcon from '@material-ui/icons/PowerSettingsNew';
-import { AppBar, Toolbar, Drawer, Button, Typography, IconButton, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { AppBar, Toolbar, Drawer, Typography, IconButton, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -47,7 +47,7 @@ class NavBar extends React.Component {
                   </ListItemIcon>
                   <ListItemText primary="Add Account" />
                 </ListItem>
-                <ListItem button>
+                <ListItem button divider>
                   <ListItemIcon>
                     <RemoveIcon />
                   </ListItemIcon>
