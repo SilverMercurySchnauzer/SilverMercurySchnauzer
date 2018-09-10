@@ -1,16 +1,35 @@
-DROP DATABASE IF EXISTS test;
-
-CREATE DATABASE test;
-
-USE test;
-
-CREATE TABLE items (
-  id int NOT NULL AUTO_INCREMENT,
-  quantity integer NOT NULL,
-  description varchar(50) NOT NULL,
-  PRIMARY KEY (ID)
+CREATE TABLE users
+(
+  id SERIAL PRIMARY KEY,
+  username TEXT,
+  password TEXT
 );
 
+CREATE TABLE tokens
+(
+  id SERIAL PRIMARY KEY,
+  user_id INT,
+  twitter_token TEXT,
+  facebook_token TEXT,
+  instagram_token TEXT
+);
+
+CREATE TABLE posts
+(
+  id SERIAL PRIMARY KEY,
+  user_id INT,
+  text TEXT,
+  media_url TEXT,
+  media_pic BYTEA,
+  media_video BYTEA,
+  post_date date
+);
+
+ALTER TABLE tokens ADD CONSTRAINT tokens_fk0 FOREIGN KEY (user_id) REFERENCES users(id);
+ALTER TABLE tokens ADD CONSTRAINT posts_fk0 FOREIGN KEY (user_id) REFERENCES users(id);
+
+
 /*  Execute this file from the command line by typing:
- *    mysql -u root < server/schema.sql
- *  to create the database and the tables.*/
+ *    heroku pg:psql -f database/schema.sql
+ *  to create the tables.
+*/
