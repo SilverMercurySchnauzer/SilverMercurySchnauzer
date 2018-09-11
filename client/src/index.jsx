@@ -16,7 +16,7 @@ class App extends React.Component {
       items: [1, 2, 3, 4, 5],
       drawerOpen: false,
       signUpComplete: false,
-      loginComplete: false,
+      loginComplete: true,
       token: null
     }
   }
