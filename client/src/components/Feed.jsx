@@ -4,7 +4,7 @@ import FeedItem from './FeedItem.jsx';
 
 const Feed = (props) => {
   return (
-    <div className='social-media-posts-container'>
+    <div className='social-media-posts-container' style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
       <h1>Social Media Content</h1>
       { props.items.map( (item, i) => <FeedItem key={i} item={item} /> ) }
     </div>
