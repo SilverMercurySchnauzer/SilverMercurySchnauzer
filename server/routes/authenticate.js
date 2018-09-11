@@ -13,6 +13,7 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
+  console.log('user data from client to server-->', req.body)
   res.status(200).json({
     message: 'connected /api/login POST'
   });
@@ -25,16 +26,18 @@ router.get('/signup', (req, res) => {
 });
 
 router.post('/signup', (req, res) => {
-  const {suername, password} = req.body;
+  const { username, password } = req.body;
+  console.log('user from client to server->', username, password)
   saveUser(username, password, (err, result) => {
     if (err || !result) {
-      res.status(500).send(err);
+      res.status(500).send(err)
     } else {
-      res.status(201).json({
-        message: 'User and password hash saved to DB'
-      })
+      console.log('server result after saving user to DB-->', result)
+      res.status(200).json({
+        message: 'User added to DB'
+      });
     }
-  })
+  });
 });
 
 router.post('/logout', (req, res) => {

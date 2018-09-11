@@ -31,7 +31,8 @@ class Signup extends React.Component {
       password: this.state.password
     })
     .then(response => {
-      console.log('New user added! response from server-->', response)
+      console.log('New user added! response from server-->', response.data.message);
+      this.props.toggleSignUp();
     })
     .catch(err => {
       console.log('unable to add user to DB');

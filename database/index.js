@@ -1,3 +1,6 @@
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+require('dotenv').config();
 // const mysql = require('mysql');
 
 // const connection = mysql.createConnection({
@@ -7,16 +10,12 @@
 //   database : 'test'
 // });
 
-
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true == process.env.SSL
+ connectionString: process.env.DATABASE_URL,
+ ssl: true// == process.env.SSL
 });
-
 
 
 exports.selectAll = callback => {
@@ -31,20 +30,17 @@ exports.selectAll = callback => {
 
 exports.saveUser = (username, password, callback) => {
   bcrypt.hash(password, saltRounds, function (err, hash) {
-    if (err) {
-      console.log('Error in making hash', err)
-    } else {
-      const queryString = `INSERT INTO users (username, password) values ($1, $2)`;
-      pool.query(queryString, [username, hash], (err, results) => {
-        if (err) {
-          callback(err, null);
-        } else {
-          callback(null, results);
-        }
-      })
-    }
-  })
-};
-  
+    const queryString = `INSERT INTO users (username, password) values ($1, $2)`;
+    pool.query(queryString, [username, hash], (err, results) => {
+      console.log('results after hashing-->', results)
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, results);
+      }
+    })
+  });
+}
+
     
   
