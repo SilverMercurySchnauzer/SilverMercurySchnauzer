@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PawIcon from '@material-ui/icons/Pets';
 import { TextField, Button, Icon } from '@material-ui/core'
 
 
@@ -35,7 +34,6 @@ const Signup = (props) => {
           </div>
           <div style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
             <Button variant="contained" size="small" className='signup-btn' color='primary' >
-              <PawIcon />
               Sign up
             </Button>
           </div>

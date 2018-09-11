@@ -67,10 +67,12 @@ class App extends React.Component {
       <div>
         <NavBar />
         <Oauth />
+        <Signup />
+        <Login />
+        <Feed items={this.state.items} />
         {/* <input value={this.state.term} onChange={this.handleTerm}/>
         <button onClick={this.handleSearch}>Search</button>
         <List items={this.state.items}/> */}
-        {/* <Feed items={this.state.items} /> */}
       </div>
     );
   }

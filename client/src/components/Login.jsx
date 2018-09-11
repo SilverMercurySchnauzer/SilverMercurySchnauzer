@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PawIcon from '@material-ui/icons/Pets';
 import { TextField, Button, Icon } from '@material-ui/core'
 
 const Login = (props) => {
@@ -34,7 +33,6 @@ const Login = (props) => {
           </div>
           <div style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
             <Button variant="contained" size="small" className='login-btn' color='primary' >
-              <PawIcon />
               Login
             </Button>
           </div>
