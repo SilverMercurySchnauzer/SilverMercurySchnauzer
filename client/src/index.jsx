@@ -8,6 +8,7 @@ import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
 import Feed from './components//Feed.jsx';
 import Oauth from './components/Oauth.jsx';
+import CreatePost from './components/CreatePost.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -66,10 +67,11 @@ class App extends React.Component {
     return (
       <div>
         <NavBar />
-        <Oauth />
+        {/* <Oauth />
         <Signup />
         <Login />
-        <Feed items={this.state.items} />
+        <Feed items={this.state.items} /> */}
+        <CreatePost />
         {/* <input value={this.state.term} onChange={this.handleTerm}/>
         <button onClick={this.handleSearch}>Search</button>
         <List items={this.state.items}/> */}
