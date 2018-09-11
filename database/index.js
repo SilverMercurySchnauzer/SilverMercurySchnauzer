@@ -7,6 +7,9 @@
 //   database : 'test'
 // });
 
+
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 const { Pool } = require('pg');
 
 const pool = new Pool({
@@ -16,9 +19,9 @@ const pool = new Pool({
 
 
 
-const selectAll = callback => {
+exports.selectAll = callback => {
   pool.query('SELECT * FROM items', (err, results, fields) => {
-    if(err) {
+    if (err) {
       callback(err, null);
     } else {
       callback(null, results);
@@ -26,4 +29,22 @@ const selectAll = callback => {
   });
 };
 
-module.exports.selectAll = selectAll;
+exports.saveUser = (username, password, callback) => {
+  bcrypt.hash(password, saltRounds, function (err, hash) {
+    if (err) {
+      console.log('Error in making hash', err)
+    } else {
+      const queryString = `INSERT INTO users (username, password) values ($1, $2)`;
+      pool.query(queryString, [username, hash], (err, results) => {
+        if (err) {
+          callback(err, null);
+        } else {
+          callback(null, results);
+        }
+      })
+    }
+  })
+};
+  
+    
+  
