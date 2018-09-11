@@ -3,19 +3,40 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
 import axios from 'axios';
+import FacebookLogin from 'react-facebook-login'; 
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
       items: [],
-      term: ''
+      term: '', 
+      isAuthenticated: false, 
+      user: null, 
+      token: '' 
     }
+    
     this.handleSearch = this.handleSearch.bind(this);
     this.handleTerm = this.handleTerm.bind(this);
     this.handleFetch = this.handleFetch.bind(this);
   }
 
+  // Logout function 
+  logout() { 
+    this.setState({ 
+      isAuthenticated: false, 
+      user: null,
+      token: ''
+    });
+  }
+
+  // Function that handles facebook response  
+  facebookResponse(event) {}; 
+  
+  // Function that prints an error 
+  onFailure (error) {
+    alert(error); 
+  }
   
   componentDidMount() {
    this.handleFetch();
@@ -58,12 +79,40 @@ class App extends React.Component {
   
 
   render () {
+    // If not authenticated then 
+    let content = !!this.state.isAuthenticated ? 
+      ( 
+          <div> 
+            <p>Authenticated</p>
+            <div>
+              {this.state.user.email}
+            </div>
+            <div> 
+              <button onClick={this.logout} className="button">
+                Logout
+              </button>
+            </div>  
+          </div>
+      ) : 
+      (
+        <div>
+          <FacebookLogin
+            appId='2129680260632592'
+            autoLoad={false}
+            fields="name, email, picture"
+            callback={this.facebookResponse} /> 
+        </div>
+      );
     return (
     <div>
       <h1>Item List</h1>
       <input value={this.state.term} onChange={this.handleTerm}/>
       <button onClick={this.handleSearch}>Search</button>
       <List items={this.state.items}/>
+
+      {content}
+      
+
     </div>)
   }
 }
