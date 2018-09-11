@@ -31,9 +31,12 @@ class Login extends React.Component {
     })
       .then(response => {
         console.log('User verified! response from server-->', response.data);
-        //localStorage.setItem('token', response.token);
-        //this.props.setToken(response.token);
-        //this.props.toggleLogin();
+        if (response.data.message !== "Wrong Password") {
+          console.log('User verified! is this token?-->', response.data.token);
+          localStorage.setItem('token', response.data.token);
+          this.props.setToken(response.data.token);
+          this.props.toggleLogin();
+        }
       })
       .catch(err => {
         console.log('unable to add user to DB');

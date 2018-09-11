@@ -16,7 +16,7 @@ class App extends React.Component {
       items: [1, 2, 3, 4, 5],
       drawerOpen: false,
       signUpComplete: false,
-      loginComplete: true,
+      loginComplete: false,
       token: null
     }
   }
@@ -44,6 +44,7 @@ class App extends React.Component {
   }
 
   render () {
+    console.log('is token set?-->', this.state.token)
     const loginView = this.state.signUpComplete === true ? 
       <Login 
         setToken={this.setToken.bind(this)}

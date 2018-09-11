@@ -42,9 +42,7 @@ exports.saveUser = (username, password, callback) => {
 }
 
 exports.validateUser = (loginName, loginPassword, callback) => {
-    
   const queryString = `select * from users where (username) like ($1)`;
-    
     pool.query(queryString, [loginName], (err, results) => {
       const hash = results.rows[0].password;
       bcrypt.compare(loginPassword, hash, (err, result) => {
@@ -54,12 +52,11 @@ exports.validateUser = (loginName, loginPassword, callback) => {
           if (!result) {
             callback(null, 'Wrong Password')
           } else {
-            callback(null, record);
+            callback(null, result);
           }
         }
       });
     });
-    
 };
     
   
