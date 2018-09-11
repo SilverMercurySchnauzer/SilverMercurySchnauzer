@@ -25,14 +25,13 @@ class FeedItem extends React.Component {
   render() {
     return (
       <div className='post-container'>
-        <Card style={{ backgroundColor: 'grey', marginRight: 'auto', marginLeft: 'auto', marginTop: '5px', marginBottom: '5px', width: '80%' }}>
+        <Card style={{ backgroundColor: '#3f51b5', marginRight: 'auto', marginLeft: 'auto', marginTop: '5px', marginBottom: '5px', width: '80%' }}>
           <CardHeader
             avatar={
               <Avatar>
                 P
               </Avatar>
             }
-            style={{color: 'white'}}
             action={
               <IconButton>
                 <MoreVertIcon />

@@ -25,7 +25,7 @@ class NavBar extends React.Component {
   render() {
     return (
       <div>
-        <AppBar position='static' color='secondary'>
+        <AppBar position='static' color='primary'>
           <Toolbar>
             <Drawer open={this.state.drawerOpen} variant='temporary' color='primary' >
               <List >

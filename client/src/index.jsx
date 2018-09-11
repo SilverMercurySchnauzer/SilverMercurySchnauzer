@@ -65,6 +65,7 @@ class App extends React.Component {
     return (
       <div>
         <NavBar />
+        {/* <Signup /> */}
         {/* <input value={this.state.term} onChange={this.handleTerm}/>
         <button onClick={this.handleSearch}>Search</button>
         <List items={this.state.items}/> */}
