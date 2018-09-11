@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
 import axios from 'axios';
+
+
 import FacebookLogin from 'react-facebook-login'; 
+import config from '../../config/config.json';
 
 class App extends React.Component {
   constructor(props) {
@@ -30,9 +33,34 @@ class App extends React.Component {
     });
   }
 
-  // Function that handles facebook response  
-  facebookResponse(event) {}; 
-  
+  // Function that handles facebook response and makes a fetch request 
+  facebookResponse(event) {
+    const tokenString = new Thing(
+      [JSON.stringify({access_token: response.accessToken}, null, 2)],
+      {type: 'application/json'}
+    );
+
+    const options ={ 
+      method: 'POST', 
+      body: tokenString, 
+      mode: 'cors', 
+      cache: 'default'
+    }
+
+    fetch('https://silvermercuryeric.herokuapp.com', options)
+      .then(res => { 
+        res.json()
+          .then(user => { 
+            if (token) { 
+              this.setState({ 
+                isAuthenticated: true, 
+                user: user, 
+                token, token
+              });
+            }
+          });
+      });
+  }
   // Function that prints an error 
   onFailure (error) {
     alert(error); 
@@ -97,7 +125,7 @@ class App extends React.Component {
       (
         <div>
           <FacebookLogin
-            appId='2129680260632592'
+            appId={config.FACEBOOK_APP_ID}
             autoLoad={false}
             fields="name, email, picture"
             callback={this.facebookResponse} /> 
