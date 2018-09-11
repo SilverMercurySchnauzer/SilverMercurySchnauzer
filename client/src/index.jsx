@@ -3,13 +3,20 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
 import axios from 'axios';
+import NavBar from './components/NavBar.jsx';
+import Login from './components/Login.jsx';
+import Signup from './components/Signup.jsx';
+import Feed from './components//Feed.jsx';
+import Oauth from './components/Oauth.jsx';
+import CreatePost from './components/CreatePost.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      items: [],
-      term: ''
+      items: [1, 2, 3, 4, 5],
+      term: '',
+      drawerOpen: false
     }
     this.handleSearch = this.handleSearch.bind(this);
     this.handleTerm = this.handleTerm.bind(this);
@@ -28,7 +35,7 @@ class App extends React.Component {
   }
 
   handleFetch() {
-    axios.get('/items')
+    axios.get('/api/items')
     .then((response) => {
       console.log('get search data-->', typeof searchTermReturn)
       //reformat response for setting items state
@@ -42,29 +49,34 @@ class App extends React.Component {
   }
 
   handleSearch() {
+    let context = this;
     console.log('search term in client-->', this.state.term)
-    axios.post('/items', {
+    axios.post('/api/items', {
       term: this.state.term
     })
     .then(function(response) {
       console.log('client post response-->', response);
-      this.handleFetch();
-
+      context.handleFetch();
     })
     .catch(function(err) {
       console.log('client err', err);
     })
   }
-  
 
   render () {
     return (
-    <div>
-      <h1>Item List</h1>
-      <input value={this.state.term} onChange={this.handleTerm}/>
-      <button onClick={this.handleSearch}>Search</button>
-      <List items={this.state.items}/>
-    </div>)
+      <div>
+        <NavBar />
+        {/* <Oauth />
+        <Signup />
+        <Login /> */}
+        <Feed items={this.state.items} />
+        {/* <CreatePost /> */}
+        {/* <input value={this.state.term} onChange={this.handleTerm}/>
+        <button onClick={this.handleSearch}>Search</button>
+        <List items={this.state.items}/> */}
+      </div>
+    );
   }
 }
 
