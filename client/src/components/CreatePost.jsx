@@ -34,18 +34,16 @@ class CreatePost extends React.Component {
           <h1>Create Post</h1>
 
           <form noValidate autoComplete='off' className='createPost-form'>
-            <div style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
+            <div style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '20px', display: 'block'}}>
               <TextField
                 fullWidth
                 required
                 id='caption'
                 label='Enter a caption'
-                placeholder='caption'
+                placeholder='Caption'
                 margin='normal'
               >
               </TextField>
-            </div>
-            <div style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '20px', display: 'block'}}>
               <TextField
                 fullWidth
                 required
@@ -59,7 +57,6 @@ class CreatePost extends React.Component {
               <TextField
                 fullWidth
                 required
-                multiline
                 id='picture-url'
                 label='Enter a picture URL'
                 placeholder='URL'
@@ -72,6 +69,7 @@ class CreatePost extends React.Component {
                     value={this.state.date}
                     disablePast
                     required
+                    placeholder='Date'
                     onChange={this.handleDateChange}
                     label="Publish Date"
                     showTodayButton
