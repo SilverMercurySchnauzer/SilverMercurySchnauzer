@@ -7,6 +7,7 @@ import NavBar from './components/NavBar.jsx';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
 import Feed from './components//Feed.jsx';
+import Oauth from './components/Oauth.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -65,11 +66,11 @@ class App extends React.Component {
     return (
       <div>
         <NavBar />
-        {/* <Signup /> */}
+        <Oauth />
         {/* <input value={this.state.term} onChange={this.handleTerm}/>
         <button onClick={this.handleSearch}>Search</button>
         <List items={this.state.items}/> */}
-        <Feed items={this.state.items} />
+        {/* <Feed items={this.state.items} /> */}
       </div>
     );
   }

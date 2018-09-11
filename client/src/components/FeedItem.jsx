@@ -28,7 +28,7 @@ class FeedItem extends React.Component {
         <Card style={{ backgroundColor: '#3f51b5', marginRight: 'auto', marginLeft: 'auto', marginTop: '5px', marginBottom: '5px', width: '80%' }}>
           <CardHeader
             avatar={
-              <Avatar>
+              <Avatar src='https://copelandcommunications.files.wordpress.com/2010/09/free-fat-twitter-bird-icon.png?w=450'>
                 P
               </Avatar>
             }
@@ -41,8 +41,8 @@ class FeedItem extends React.Component {
             subheader="A date will be here"
           />
           <CardMedia
-            style={{height: '100px', width: '100px', overflow: 'auto'}}
-            image="http://www.clker.com/cliparts/l/V/H/N/w/o/twitter-fat-bird-hi.png"
+            style={{height: '100px', width: '100px', marginLeft: '30px'}}
+            image="https://thumbs.dreamstime.com/z/retro-bicycle-nature-background-autumn-49743173.jpg"
           />
           <CardContent>
           </CardContent>
