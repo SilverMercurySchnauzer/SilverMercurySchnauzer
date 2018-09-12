@@ -52,11 +52,11 @@ class OAuth extends React.Component {
         mode: 'cors',
         cache: 'default'
     };
-    fetch('https://silvermercuryeric.herokuapp.com/api/auth/facebook/', options)
+    fetch("https://silvermercuryeric.herokuapp.com/api/auth/facebook/", options)
       
       .then(res => {
         console.log('This is res', res);
-        const token = res.headers.get('x-auth-token');
+        const token = res.headers.get("x-auth-token");
         res.json().then(user => {
             if (token) {
               this.setState({isAuthenticated: true, user, token})
