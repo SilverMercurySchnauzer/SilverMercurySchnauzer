@@ -26,8 +26,13 @@ router.post('/login', (req, res) => {
           message: 'Wrong Password'
         });
       } else {
-        res.status(200).json({
-          username, token: jwt.sign({ username }, process.env.JWT_SECRET)
+        const userId = result['id'];
+        console.log('user id server-->', userId)
+        res.status(200).json(
+          {
+            username, 
+            token: jwt.sign({ username }, process.env.JWT_SECRET),
+            userId
         });
       }
     }

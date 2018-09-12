@@ -4,21 +4,72 @@ import { TextField, Button, Icon } from '@material-ui/core';
 import DateFnsUtils from 'material-ui-pickers/utils/date-fns-utils';
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 import { DateTimePicker } from 'material-ui-pickers';
+import axios from '../../../node_modules/axios';
 
 class CreatePost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userId: this.props.userId,
+      caption: '',
+      post: '',
+      url: '',
       date: null,
       showPicker: false
     }
 
     this.handlePublishClick = this.handlePublishClick.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
+    this.setCaption = this.setCaption.bind(this);
+    this.setPost = this.setPost.bind(this);
+    this.setUrl = this.setUrl.bind(this);
   }
 
   handlePublishClick() {
+    axios.post('api/publish', {
+      caption: this.state.caption,
+      post: this.state.post,
+      url: this.state.url,
+      userId: this.props.userId
+    })
+      .then(response => {
+        console.log('Post successfully published on social media', response.data);
+       //reset client fields once user successfully publishes post on social media
+        this.setState({
+          caption: '',
+          post: '',
+          url: '',
+          date: null,
+          showPicker: false
+        })
+      })
+      .catch(err => {
+        console.log('unable to send post to FB/Twitter');
+      })
+  }
 
+  handleSavePost() {
+    console.log('save post args-->', this.state.userId);
+    axios.post('api/save', {
+      caption: this.state.caption,
+      post: this.state.post,
+      url: this.state.url,
+      date: this.state.date
+    })
+      .then(response => {
+        console.log('Post successfully saved to DB', response.data);
+        //reset client fields once user successfully saves post on DB
+        this.setState({
+          caption: '',
+          post: '',
+          url: '',
+          date: null,
+          showPicker: false
+        })
+      })
+      .catch(err => {
+        console.log('unable to save post to DB');
+      })
   }
 
   handleDateChange(newDate) {
@@ -27,7 +78,26 @@ class CreatePost extends React.Component {
     });
   }
 
+  setCaption(e) {
+    this.setState({ 
+      caption: e.target.value
+    })
+  }
+
+  setPost(e) {
+    this.setState({
+      post: e.target.value
+    })
+  }
+
+  setUrl(e) {
+    this.setState({
+      url: e.target.value
+    })
+  }
+
   render() {
+
     return (
       <div className='createPost-container'>
         <div className='createPost-form-container' style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
@@ -36,6 +106,8 @@ class CreatePost extends React.Component {
           <form noValidate autoComplete='off' className='createPost-form'>
             <div style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '20px', display: 'block'}}>
               <TextField
+                value={this.state.caption}
+                onChange={this.setCaption}
                 fullWidth
                 required
                 id='caption'
@@ -45,6 +117,8 @@ class CreatePost extends React.Component {
               >
               </TextField>
               <TextField
+                value={this.state.post}
+                onChange={this.setPost}
                 fullWidth
                 required
                 multiline
@@ -55,6 +129,8 @@ class CreatePost extends React.Component {
               >
               </TextField>
               <TextField
+                value={this.state.url}
+                onChange={this.setUrl}
                 fullWidth
                 required
                 id='picture-url'
@@ -67,10 +143,10 @@ class CreatePost extends React.Component {
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <DateTimePicker
                     value={this.state.date}
+                    onChange={this.handleDateChange}
                     disablePast
                     required
                     placeholder='Date'
-                    onChange={this.handleDateChange}
                     label="Publish Date"
                     showTodayButton
                     style={{ width: '300px' }}
@@ -78,6 +154,7 @@ class CreatePost extends React.Component {
                 </MuiPickersUtilsProvider>
               </div>
               <Button
+                onClick={this.handleSavePost}
                 variant="contained"
                 size="medium"
                 className='save-btn'
@@ -85,12 +162,13 @@ class CreatePost extends React.Component {
                 style={{ margin: '20px' }}
               > Save </Button>
               <Button
+                onClick={this.handlePublishClick}
                 variant="contained"
                 size="medium"
                 className='publish-btn'
                 color='primary'
                 style={{ margin: '20px' }}
-              > Publish </Button>
+              > Publish Now</Button>
             </div>
             <div>
               
