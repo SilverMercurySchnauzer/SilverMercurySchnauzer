@@ -57,7 +57,7 @@ class OAuth extends React.Component {
     };
 
     // Fetch request to FB api 
-    fetch('', options)
+    fetch('https://silvermercuryeric.herokuapp.com/', options)
       .then(res => { 
         console.log('THIS IS OUR RESPONSE IN FETCH REQUEST', res);
         // Obtain token from response 
