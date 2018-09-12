@@ -43,7 +43,7 @@ class OAuth extends React.Component {
 
   // Facebook API call from client 
   facebookResponse(response) { 
-    // console.log('THIS IS OUR RESPONSE SENT TO FB:', response);
+    console.log('THIS IS OUR RESPONSE SENT TO FB:', response);
    
     const tokenBlob = new Blob([JSON.stringify({access_token: response.accessToken}, null, 2)], {type : 'application/json'});
     const options = {
@@ -52,19 +52,25 @@ class OAuth extends React.Component {
         mode: 'cors',
         cache: 'default'
     };
-    fetch("https://silvermercuryeric.herokuapp.com/", options)
+    fetch("https://silvermercuryeric.herokuapp.com/auth/facebook/callback", options)
       
       .then(res => {
         console.log('This is res', res);
-        
         const token = res.headers.get("x-auth-token");
+        console.log('THIS IS OUR TOKEN', token);
+
+        // if (token) { 
+        //   this.setState({isAuthenticated: true, user, token})
+        // }
         
-        return res.json({'result': 'SUCCESS'})
-        .then(user => {
-            if (token) {
-              this.setState({isAuthenticated: true, user, token})
-            }
-        });
+        return res.json(); 
+        
+        // res.json()
+        // .then(user => {
+        //     if (token) {
+        //       this.setState({isAuthenticated: true, user, token})
+        //     }
+        // });
     }
     );
 
