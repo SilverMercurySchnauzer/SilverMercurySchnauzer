@@ -35,6 +35,7 @@ exports.saveUser = (username, password, callback) => {
       if (err) {
         callback(err, null);
       } else {
+        console.log('results in DB after saving user and hash-->', results);
         callback(null, results);
       }
     })

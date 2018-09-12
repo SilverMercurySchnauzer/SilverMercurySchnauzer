@@ -42,7 +42,9 @@ router.post('/login', (req, res) => {
 
 router.post('/signup', (req, res) => {
   const { username, password } = req.body;
+  console.log('server user and pass-->', username, password);
   saveUser(username, password, (err, result) => {
+    console.log('server result after saving new user');
     if (err || !result) {
       res.status(500).send(err)
     } else {
