@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ExandIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import WhatsHotIcon from '@material-ui/icons/WhatsHot';
+// import WhatsHotIcon from '@material-ui/icons/WhatsHot';
 import { Avatar, Card, CardHeader, CardMedia, CardContent, CardActions, CardActionArea, Collapse, IconButton, Typography } from '@material-ui/core';
 
 class FeedItem extends React.Component {

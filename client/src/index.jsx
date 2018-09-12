@@ -7,7 +7,7 @@ import NavBar from './components/NavBar.jsx';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
 import Feed from './components//Feed.jsx';
-import Oauth from './components/Oauth.jsx';
+import OAuth from './components/Oauth.jsx';
 import CreatePost from './components/CreatePost.jsx';
 
 class App extends React.Component {
@@ -67,8 +67,8 @@ class App extends React.Component {
     return (
       <div>
         <NavBar />
-        {/* <Oauth />
-        <Signup />
+        <OAuth />
+        {/* <Signup />
         <Login /> */}
         <Feed items={this.state.items} />
         {/* <CreatePost /> */}
