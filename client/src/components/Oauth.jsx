@@ -44,6 +44,7 @@ class OAuth extends React.Component {
   // Facebook API call from client 
   facebookResponse(response) { 
     console.log('THIS IS OUR FACEBOOK REQUEST RESPONSE:', response.accessToken);
+    // Create a token object 
     const tokenFromFB = new Blob(
       [JSON.stringify({access_token: response.accessToken}, null, 2)], 
       {type: 'application/json'}); 
@@ -57,7 +58,7 @@ class OAuth extends React.Component {
     };
 
     // Fetch request to FB api 
-    fetch('https://silvermercuryeric.herokuapp.com/', options)
+    fetch('https://silvermercuryeric.herokuapp.com/api/auth/facebook/callback', options)
       .then(res => { 
         console.log('THIS IS OUR RESPONSE IN FETCH REQUEST', res);
         // Obtain token from response 
@@ -69,10 +70,10 @@ class OAuth extends React.Component {
                 isAuthenticated: true, 
                 user: user, 
                 token: token 
-              });
+              })
             }
-          });
-      });
+          })
+      })
 
   }; 
   

@@ -22,6 +22,7 @@
     "@material-ui/icons": "^3.0.1",
     "axios": "^0.18.0",
     "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
     "date-fns": "^2.0.0-alpha.16",
     "dotenv": "^6.0.0",
