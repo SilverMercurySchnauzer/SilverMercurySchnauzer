@@ -53,26 +53,23 @@ class OAuth extends React.Component {
         cache: 'default'
     };
     fetch("https://silvermercuryeric.herokuapp.com/auth/facebook/callback", options)
-      
-      .then(res => {
-        console.log('This is res', res);
-        const token = res.headers.get("x-auth-token");
+      .then((response) => {
+        console.log('This is res', res.headers.get("x-auth-token"));
+        const token = response.headers.get("x-auth-token");
         console.log('THIS IS OUR TOKEN', token);
 
         // if (token) { 
         //   this.setState({isAuthenticated: true, user, token})
         // }
         
-        return res.json(); 
-        
+        return response.json();        
         // res.json()
         // .then(user => {
         //     if (token) {
         //       this.setState({isAuthenticated: true, user, token})
         //     }
         // });
-    }
-    );
+    });
 
 
   }; 
