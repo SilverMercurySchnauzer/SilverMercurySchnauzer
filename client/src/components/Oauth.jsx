@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Button } from '@material-ui/core';
+
+// FB OAuth imports 
 import FacebookLogin from 'react-facebook-login';
+import config from '../../../config/config.json';
 
 
 // const OAuth = (props) => {
@@ -39,7 +42,37 @@ class OAuth extends React.Component {
   }
 
   // Facebook API call from client 
-  facebookResponse(event) { 
+  facebookResponse(response) { 
+    console.log('THIS IS OUR FACEBOOK REQUEST RESPONSE:', response.accessToken);
+    const tokenFromFB = new Blob(
+      [JSON.stringify({access_token: response.accessToken}, null, 2)], 
+      {type: 'application/json'}); 
+    
+    // Create an options object for fetch request 
+    const options = { 
+      method: 'POST', 
+      body: tokenFromFB,
+      mode: 'cors',
+      cache: 'default'
+    };
+
+    // Fetch request to FB api 
+    fetch('', options)
+      .then(res => { 
+        console.log('THIS IS OUR RESPONSE IN FETCH REQUEST', res);
+        // Obtain token from response 
+        const token = res.headers.get('x-auth-token');
+        res.json()
+          .then(user => { 
+            if (token) { 
+              this.setState({
+                isAuthenticated: true, 
+                user: user, 
+                token: token 
+              });
+            }
+          });
+      });
 
   }; 
   
@@ -62,7 +95,7 @@ class OAuth extends React.Component {
             color='primary'
             value='facebook-login'
             style={{ margin: '15px' }}
-            appId='' 
+            appId= {config.FACEBOOK_APP_ID}
             autoLoad={false}
             fields='name, email, picture'
             callback={this.facebookResponse} 
