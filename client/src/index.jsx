@@ -43,23 +43,29 @@ class App extends React.Component {
     })
   }
 
+  destroyToken() {
+    this.setState({
+      token: null
+    })
+  }
+
   render () {
     console.log('is token set?-->', this.state.token)
-    const loginView = this.state.signUpComplete === true ? 
+    const loginView = this.state.signUpComplete === true && this.state.token === null? 
       <Login 
         setToken={this.setToken.bind(this)}
         toggleLogin={this.toggleLoginComplete.bind(this)}/> : 
       <Signup
         toggleSignUp={this.toggleSignUpComplete.bind(this)}/>;
 
-    const feedView = this.state.loginComplete === true ? <Feed items={this.state.items} /> : null;
+    const feedView = this.state.token !== null ? <Feed items={this.state.items} />  : null;
 
     return (
       <div>
         {loginView}
         {feedView}
-        {/* <NavBar /> */}
         
+        <NavBar destroyToken={this.destroyToken.bind(this)} />
         {/* <Feed items={this.state.items} /> */}
         {/* <CreatePost /> */}
        
