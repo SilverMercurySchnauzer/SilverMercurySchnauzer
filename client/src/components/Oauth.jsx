@@ -58,7 +58,7 @@ class OAuth extends React.Component {
     };
 
     // Fetch request to FB api 
-    fetch('https://silvermercuryeric.herokuapp.com/api/auth/facebook/callback', options)
+    fetch('https://silvermercuryeric.herokuapp.com/api/auth/facebook/', options)
       .then(res => { 
         console.log('THIS IS OUR RESPONSE IN FETCH REQUEST', res);
         // Obtain token from response 
@@ -96,7 +96,7 @@ class OAuth extends React.Component {
             color='primary'
             value='facebook-login'
             style={{ margin: '15px' }}
-            appId= {config.FACEBOOK_APP_ID}
+            appId= '2129680260632592'
             autoLoad={false}
             fields='name, email, picture'
             callback={this.facebookResponse} 
