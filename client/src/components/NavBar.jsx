@@ -53,7 +53,7 @@ class NavBar extends React.Component {
                   </ListItemIcon>
                   <ListItemText primary="Remove Account" />
                 </ListItem>
-                <ListItem button>
+                <ListItem button onClick={this.props.destroyToken}>
                   <ListItemIcon>
                     <LogoutIcon />
                   </ListItemIcon>

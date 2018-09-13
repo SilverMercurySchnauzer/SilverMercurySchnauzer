@@ -56,6 +56,13 @@ class App extends React.Component {
     })
   }
 
+  destroyToken() {
+    localStorage.removeItem('token');
+    this.setState({
+      token: null
+    })
+  }
+
   render () {
     console.log('is token set?-->', this.state.token)
     console.log('is user id set?-->', this.state.userId)
@@ -73,7 +80,7 @@ class App extends React.Component {
       <div>
         {loginView}
         {feedView}
-        {/* <NavBar /> */}
+        <NavBar destroyToken={this.destroyToken.bind(this)} />
         
         {/* <Feed items={this.state.items} /> */}
         <CreatePost userId={this.state.userId}/>
