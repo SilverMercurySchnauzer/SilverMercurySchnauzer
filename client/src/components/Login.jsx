@@ -66,6 +66,7 @@ class Login extends React.Component {
         console.log('response.data.message: ', response.data.message);
         if (response.data.message !== 'Wrong Password') {
           localStorage.setItem('token', response.data.token);
+          localStorage.setItem('userId', response.data.userId);
           this.props.history.push('/feed');
         } else {
           this.resetForm();
