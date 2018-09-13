@@ -44,7 +44,7 @@ exports.saveUser = (username, password, callback) => {
 exports.validateUser = (loginName, loginPassword, callback) => {
   const queryString = `select * from users where (username) like ($1)`;
     pool.query(queryString, [loginName], (err, results) => {
-      const hash = results.rows[0].password;
+      const hash = results.rows[0] ? results.rows[0].password : '';
       bcrypt.compare(loginPassword, hash, (err, result) => {
         if (err) {
           callback(err, null);
