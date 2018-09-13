@@ -21,7 +21,12 @@ class NavBar extends React.Component {
   }
 
   toggleDrawer() {
-    this.setState({ drawerOpen: !this.state.drawerOpen });
+    if (this.state.drawerOpen) {
+      this.setState({ drawerOpen: !this.state.drawerOpen }, 
+        this.props.history.push('/feed'));
+    } else {
+      this.setState({ drawerOpen: !this.state.drawerOpen });
+    }
   }
 
   handleLogout() {

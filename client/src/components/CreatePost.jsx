@@ -5,6 +5,7 @@ import DateFnsUtils from 'material-ui-pickers/utils/date-fns-utils';
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 import { DateTimePicker } from 'material-ui-pickers';
 import axios from 'axios';
+import NavBar from './NavBar.jsx';
 
 class CreatePost extends React.Component {
   constructor(props) {
@@ -98,81 +99,84 @@ class CreatePost extends React.Component {
 
   render() {
     return (
-      <div className='createPost-container'>
-        <div className='createPost-form-container' style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
-          <h1>Create Post</h1>
+      <div>
+        <NavBar />
+        <div className='createPost-container'>
+          <div className='createPost-form-container' style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
+            <h1>Create Post</h1>
 
-          <form noValidate autoComplete='off' className='createPost-form'>
-            <div style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '20px', display: 'block'}}>
-              <TextField
-                value={this.state.caption}
-                onChange={this.setCaption}
-                fullWidth
-                required
-                id='caption'
-                label='Enter a caption'
-                placeholder='Caption'
-                margin='normal'
-              >
-              </TextField>
-              <TextField
-                value={this.state.post}
-                onChange={this.setPost}
-                fullWidth
-                required
-                multiline
-                id='content'
-                label='Enter content'
-                margin='normal'
-                rows={5}
-              >
-              </TextField>
-              <TextField
-                value={this.state.url}
-                onChange={this.setUrl}
-                fullWidth
-                required
-                id='picture-url'
-                label='Enter a picture URL'
-                placeholder='URL'
-                margin='normal'
-              >
-              </TextField>
-              <div style={{ width: '100%' }}>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <DateTimePicker
-                    value={this.state.date}
-                    onChange={this.handleDateChange}
-                    disablePast
-                    required
-                    placeholder='Date'
-                    label="Publish Date"
-                    showTodayButton
-                    style={{ width: '300px' }}
-                  />
-                </MuiPickersUtilsProvider>
+            <form noValidate autoComplete='off' className='createPost-form'>
+              <div style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '20px', display: 'block' }}>
+                <TextField
+                  value={this.state.caption}
+                  onChange={this.setCaption}
+                  fullWidth
+                  required
+                  id='caption'
+                  label='Enter a caption'
+                  placeholder='Caption'
+                  margin='normal'
+                >
+                </TextField>
+                <TextField
+                  value={this.state.post}
+                  onChange={this.setPost}
+                  fullWidth
+                  required
+                  multiline
+                  id='content'
+                  label='Enter content'
+                  margin='normal'
+                  rows={5}
+                >
+                </TextField>
+                <TextField
+                  value={this.state.url}
+                  onChange={this.setUrl}
+                  fullWidth
+                  required
+                  id='picture-url'
+                  label='Enter a picture URL'
+                  placeholder='URL'
+                  margin='normal'
+                >
+                </TextField>
+                <div style={{ width: '100%' }}>
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <DateTimePicker
+                      value={this.state.date}
+                      onChange={this.handleDateChange}
+                      disablePast
+                      required
+                      placeholder='Date'
+                      label="Publish Date"
+                      showTodayButton
+                      style={{ width: '300px' }}
+                    />
+                  </MuiPickersUtilsProvider>
+                </div>
+                <Button
+                  onClick={this.handleSavePost}
+                  variant="contained"
+                  size="medium"
+                  className='save-btn'
+                  color='primary'
+                  style={{ margin: '20px' }}
+                > Save </Button>
+                <Button
+                  onClick={this.handlePublishClick}
+                  variant="contained"
+                  size="medium"
+                  className='publish-btn'
+                  color='primary'
+                  style={{ margin: '20px' }}
+                > Publish </Button>
               </div>
-              <Button
-                onClick={this.handleSavePost}
-                variant="contained"
-                size="medium"
-                className='save-btn'
-                color='primary'
-                style={{ margin: '20px' }}
-              > Save </Button>
-              <Button
-                onClick={this.handlePublishClick}
-                variant="contained"
-                size="medium"
-                className='publish-btn'
-                color='primary'
-                style={{ margin: '20px' }}
-              > Publish </Button>
-            </div>
-            <div>
-              
-            </div>
-          </form>
+              <div>
+
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     );
