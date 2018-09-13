@@ -32,10 +32,12 @@ class Login extends React.Component {
       .then(response => {
         console.log('User verified! response from server-->', response.data);
         if (response.data.message !== "Wrong Password") {
-          console.log('User verified! is this token?-->', response.data.token);
           localStorage.setItem('token', response.data.token);
           this.props.setToken(response.data.token);
+          this.props.setUserId(response.data.userId);
           this.props.toggleLogin();
+        } else {
+          console.log("Wrong Password")
         }
       })
       .catch(err => {

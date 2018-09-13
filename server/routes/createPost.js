@@ -7,6 +7,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/save', (req, res) => {
+  console.log('body data to server-->', req.body);
   res.status(200).json({
     message: 'connected /createPost/save POST'
   });

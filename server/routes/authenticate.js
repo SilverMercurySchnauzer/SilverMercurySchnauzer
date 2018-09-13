@@ -16,7 +16,6 @@ router.use('/oauth', oauth);
 
 router.post('/login', (req, res) => {
   const { username, password } = req.body;
-  console.log('user in server', username, 'password in server', password)
   validateUser(username, password, (err, result) => {
     if (err || !result) {
       res.status(500).send(err)
@@ -26,8 +25,12 @@ router.post('/login', (req, res) => {
           message: 'Wrong Password'
         });
       } else {
-        res.status(200).json({
-          username, token: jwt.sign({ username }, process.env.JWT_SECRET)
+        const userId = result['id'];
+        res.status(200).json(
+          {
+            username, 
+            token: jwt.sign({ username }, process.env.JWT_SECRET),
+            userId
         });
       }
     }
