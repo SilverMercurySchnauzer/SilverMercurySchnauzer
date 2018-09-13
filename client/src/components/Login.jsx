@@ -2,13 +2,46 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { TextField, Button, Icon } from '@material-ui/core'
 import axios from 'axios';
+import { Redirect, withRouter } from "react-router-dom";
+import LoadingScreen from './LoadingScreen.jsx';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loginName: '',
-      loginPassword: ''
+      loginPassword: '',
+      authenticated: false,
+      loading: true,
+      hasMounted: false
+    }
+
+    this.handleValidation = this.handleValidation.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.setloginName = this.setloginName.bind(this);
+    this.setloginPassword = this.setloginPassword.bind(this);
+    this.resetForm = this.resetForm.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({
+      hasMounted: true
+    }, () => {
+      this.handleValidation();
+    });
+  }
+
+  handleValidation() {
+    if (localStorage.getItem('token')) {
+      this.setState({
+        authenticated: true,
+        loading: false
+      });
+    } else {
+      this.setState({
+        authenticated: false,
+        loading: false
+      })
     }
   }
 
@@ -30,70 +63,91 @@ class Login extends React.Component {
       password: this.state.loginPassword
     })
       .then(response => {
-        console.log('User verified! response from server-->', response.data);
-        if (response.data.message !== "Wrong Password") {
-          console.log('User verified! is this token?-->', response.data.token);
+        console.log('response.data.message: ', response.data.message);
+        if (response.data.message !== 'Wrong Password') {
           localStorage.setItem('token', response.data.token);
-          this.props.setToken(response.data.token);
-          this.props.toggleLogin();
+          this.props.history.push('/feed');
+        } else {
+          this.resetForm();
         }
       })
       .catch(err => {
-        console.log('unable to add user to DB');
+        console.log('error logging in: ', err);
       })
   }
 
-  render() {
-    return (
-      <div className='login-container'>
-        <div className='login-form-container' style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
-          <h1>Login</h1>
+  resetForm() {
+    this.setState({
+      loginName: '',
+      loginPassword: ''
+    });
+  }
 
-          <form noValidate autoComplete='off' className='login-form'>
-            <div style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
-              <TextField
-                fullWidth
-                required
-                id='username'
-                label='Enter a username'
-                placeholder='Username'
-                margin='normal'
-                value={this.state.loginName}
-                onChange={this.setloginName.bind(this)}
-              >
-              </TextField>
-            </div>
-            <div style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '10px' }}>
-              <TextField
-                fullWidth
-                required
-                id='password'
-                label='Enter a password'
-                placeholder='password'
-                margin='normal'
-                value={this.state.loginPassword}
-                onChange={this.setloginPassword.bind(this)}
-              >
-              </TextField>
-            </div>
-            <div style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
-              <Button 
-                variant="contained" 
-                size="small" 
-                className='login-btn' 
-                color='primary' 
-                onClick={this.handleLogin.bind(this)}
+  render() {
+    if (this.state.loading) {
+      return ( <LoadingScreen /> );
+    } else {
+      if (this.state.authenticated) {
+        return ( <Redirect to='/feed' /> );
+      }
+
+      return (
+        <div className='login-container'>
+          <div className='login-form-container' style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
+            <h1>Login</h1>
+
+            <form noValidate autoComplete='off' className='login-form' >
+              <div style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
+                <TextField
+                  fullWidth
+                  required
+                  id='username'
+                  label='Enter a username'
+                  placeholder='Username'
+                  margin='normal'
+                  value={this.state.loginName}
+                  onChange={this.setloginName}
                 >
-                Login
+                </TextField>
+              </div>
+              <div style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', marginBottom: '10px' }}>
+                <TextField
+                  fullWidth
+                  required
+                  type='password'
+                  id='password'
+                  label='Enter a password'
+                  placeholder='password'
+                  margin='normal'
+                  value={this.state.loginPassword}
+                  onChange={this.setloginPassword}
+                >
+                </TextField>
+              </div>
+              <div style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
+                <Button
+                  variant="contained"
+                  size="small"
+                  className='login-btn'
+                  color='primary'
+                  onClick={this.handleLogin}
+                  formAction='submit'
+                >
+                  Login
             </Button>
-            </div>
-          </form>
+              </div>
+            </form>
+            <h3 onClick={(e) => {
+              e.preventDefault();
+              this.props.history.push('/signup');
+            }}>Or create an account <a href='#'>here</a></h3>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
   
 
 
-export default Login;
+export default withRouter(Login);

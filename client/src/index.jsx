@@ -1,71 +1,70 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
 import axios from 'axios';
-import NavBar from './components/NavBar.jsx';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
-import Feed from './components/Feed.jsx';
 import Oauth from './components/Oauth.jsx';
+import Feed from './components/Feed.jsx';
 import CreatePost from './components/CreatePost.jsx';
+import LoadingScreen from './components/LoadingScreen.jsx';
+import { BrowserRouter, Route, Link, Redirect, Switch } from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
       items: [1, 2, 3, 4, 5],
-      drawerOpen: false,
-      signUpComplete: false,
-      loginComplete: false,
-      token: null
+      token: null,
+      hasMounted: false,
+      authenticated: false,
+      loading: false
     }
+
+    this.handleValidation = this.handleValidation.bind(this);
   }
 
   componentDidMount() {
-   //do something here eventually
-  }
-
-  toggleSignUpComplete() {
-    this.setState ({
-      signUpComplete: !this.state.signUpComplete
-    })
-  }
-
-  toggleLoginComplete() {
-    this.setState ({
-      loginComplete: !this.state.loginComplete
-    })
-  }
-
-  setToken(newToken) {
     this.setState({
-      token: newToken
-    })
+      hasMounted: true
+    }, () => {
+      this.handleValidation();
+    });
+  }
+
+  handleValidation() {
+    axios.get('/validateuser', { params: { token: localStorage.getItem('token') } } )
+      .then(authStatus => {
+        this.setState({ 
+          loading: false,
+          authenticated: authStatus.data
+         });
+      })
+      .catch(err => {
+        console.log('err: ', err);
+        console.log('Unable to authenticate user on server: ', err);
+      });
   }
 
   render () {
-    console.log('is token set?-->', this.state.token)
-    const loginView = this.state.signUpComplete === true ? 
-      <Login 
-        setToken={this.setToken.bind(this)}
-        toggleLogin={this.toggleLoginComplete.bind(this)}/> : 
-      <Signup
-        toggleSignUp={this.toggleSignUpComplete.bind(this)}/>;
-
-    const feedView = this.state.loginComplete === true ? <Feed items={this.state.items} /> : null;
-
     return (
       <div>
-        {loginView}
-        {feedView}
-        {/* <NavBar /> */}
-        
-        {/* <Feed items={this.state.items} /> */}
-        {/* <CreatePost /> */}
-       
+        <Switch>
+          <Route exact path='/login' component={Login} />
+          <Route path='/feed' component={Feed} />
+          <Route exact path='/signup' component={Signup} />
+          <Route exact path='/oauth' component={Oauth} />
+          <Route exact path='/createpost' component={CreatePost} />
+          <Redirect to='/' />
+        </Switch>
+
+        {this.state.loading ? <LoadingScreen /> : 
+          this.state.authenticated ? <Redirect to='/feed' /> : <Redirect to='/login' /> }
       </div>
     );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render((
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>), document.getElementById('app'));

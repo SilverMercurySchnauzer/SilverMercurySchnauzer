@@ -7,6 +7,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import CreateIcon from '@material-ui/icons/Create';
 import LogoutIcon from '@material-ui/icons/PowerSettingsNew';
 import { AppBar, Toolbar, Drawer, Typography, IconButton, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { Redirect, withRouter } from 'react-router-dom';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -16,10 +17,16 @@ class NavBar extends React.Component {
     };
 
     this.toggleDrawer = this.toggleDrawer.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   toggleDrawer() {
     this.setState({ drawerOpen: !this.state.drawerOpen });
+  }
+
+  handleLogout() {
+    localStorage.removeItem('token');
+    this.props.history.push('/login');
   }
 
   render() {
@@ -53,7 +60,7 @@ class NavBar extends React.Component {
                   </ListItemIcon>
                   <ListItemText primary="Remove Account" />
                 </ListItem>
-                <ListItem button>
+                <ListItem button onClick={this.handleLogout}>
                   <ListItemIcon>
                     <LogoutIcon />
                   </ListItemIcon>
@@ -75,4 +82,4 @@ class NavBar extends React.Component {
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);
