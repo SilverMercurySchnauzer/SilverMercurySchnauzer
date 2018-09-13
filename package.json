@@ -1,5 +1,5 @@
 {
-  "name": "github-fetcher-fullstack-v2",
+  "name": "SilverMercurySchnauzerDash",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -31,6 +31,11 @@
     "material-ui-pickers": "^1.0.0-rc.14",
     "mysql": "^2.13.0",
     "nodemon": "^1.18.4",
+    "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
+    "passport-github": "^1.1.0",
+    "passport-oauth": "^1.0.0",
+    "passport-twitter": "^1.0.4",
     "pg": "^7.4.3",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
