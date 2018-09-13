@@ -16,7 +16,6 @@ router.use('/oauth', oauth);
 
 router.post('/login', (req, res) => {
   const { username, password } = req.body;
-  console.log('user in server', username, 'password in server', password)
   validateUser(username, password, (err, result) => {
     if (err || !result) {
       res.status(500).send(err)
@@ -27,7 +26,6 @@ router.post('/login', (req, res) => {
         });
       } else {
         const userId = result['id'];
-        console.log('user id server-->', userId)
         res.status(200).json(
           {
             username, 

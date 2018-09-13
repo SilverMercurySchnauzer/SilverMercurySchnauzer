@@ -23,7 +23,13 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-   //do something here eventually
+   
+   if (this.state.token !== null) {
+     this.setState({
+       signUpComplete: true,
+       loginComplete: true
+     })
+   }
   }
 
   toggleSignUpComplete() {

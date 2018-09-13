@@ -4,7 +4,7 @@ import { TextField, Button, Icon } from '@material-ui/core';
 import DateFnsUtils from 'material-ui-pickers/utils/date-fns-utils';
 import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 import { DateTimePicker } from 'material-ui-pickers';
-import axios from '../../../node_modules/axios';
+import axios from 'axios';
 
 class CreatePost extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class CreatePost extends React.Component {
       date: null,
       showPicker: false
     }
-
+    this.handleSavePost = this.handleSavePost.bind(this)
     this.handlePublishClick = this.handlePublishClick.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.setCaption = this.setCaption.bind(this);
@@ -48,13 +48,15 @@ class CreatePost extends React.Component {
       })
   }
 
-  handleSavePost() {
-    console.log('save post args-->', this.state.userId);
-    axios.post('api/save', {
+  handleSavePost(e) {
+    e.preventDefault();
+    axios.post('/api/createPost/save', {
       caption: this.state.caption,
       post: this.state.post,
       url: this.state.url,
-      date: this.state.date
+      date: this.state.date,
+      id: this.props.userId
+
     })
       .then(response => {
         console.log('Post successfully saved to DB', response.data);
