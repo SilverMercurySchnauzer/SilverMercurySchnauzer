@@ -26,7 +26,7 @@ class CreatePost extends React.Component {
   }
 
   handlePublishClick() {
-    axios.post('api/publish', {
+    axios.post('/api/createPost/publish', {
       caption: this.state.caption,
       post: this.state.post,
       url: this.state.url,
