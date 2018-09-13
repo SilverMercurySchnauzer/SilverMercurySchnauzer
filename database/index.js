@@ -46,13 +46,14 @@ exports.validateUser = (loginName, loginPassword, callback) => {
     pool.query(queryString, [loginName], (err, results) => {
       const hash = results.rows[0] ? results.rows[0].password : '';
       bcrypt.compare(loginPassword, hash, (err, result) => {
+        const userIdUsernamePassword = results.rows[0];
         if (err) {
           callback(err, null);
         } else {
           if (!result) {
             callback(null, 'Wrong Password')
           } else {
-            callback(null, result);
+            callback(null, userIdUsernamePassword);
           }
         }
       });
