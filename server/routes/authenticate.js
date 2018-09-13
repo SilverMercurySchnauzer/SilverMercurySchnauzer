@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const oauth = require('./oauth.js');
 const { saveUser } = require('../../database/index');
 const { validateUser } = require('../../database/index');
-require('dotenv').config();
 
 // oauth routes
 router.use('/oauth', oauth);
@@ -16,7 +15,6 @@ router.use('/oauth', oauth);
 
 router.post('/login', (req, res) => {
   const { username, password } = req.body;
-  console.log('user in server', username, 'password in server', password)
   validateUser(username, password, (err, result) => {
     if (err || !result) {
       res.status(500).send(err)

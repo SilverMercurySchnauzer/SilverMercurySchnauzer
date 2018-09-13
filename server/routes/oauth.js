@@ -24,6 +24,7 @@ router.get('/facebook', (req, res) => {
   });
 });
 
+// authfacebookcallback
 router.post('/facebook/authenticatedCallback', (req, res) => {
   res.status(200).json({
     message: 'connected /oauth/facebook/authenticatedCallback POST'
