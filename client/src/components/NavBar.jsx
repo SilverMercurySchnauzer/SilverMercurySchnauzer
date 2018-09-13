@@ -46,7 +46,7 @@ class NavBar extends React.Component {
                   <ListItemIcon>
                     <CreateIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Create New Post" />
+                  <ListItemText primary="Create New Post" onClick={ () => this.props.history.push('/createpost') }/>
                 </ListItem>
                 <ListItem button divider>
                   <ListItemIcon>
