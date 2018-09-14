@@ -1,13 +1,7 @@
 const router = require('express').Router();
 const passport = require('passport');
-// const GithubStrategy = require('passport-github').Strategy;
 const twitter = require('../../utility/passport/twitter');
-// const FacebookStrategy = require('passport-facebook').Strategy;
-// const OAuthStrategy = require('passport-oauth').OAuthStrategy;
 const session = require('express-session');
-// const request = require('request');
-// const bodyParser = require('body-parser');
-// const oAuth = require('./oauth.js');
 require('dotenv').config();
 
 router.get('/', (req, res) => {
@@ -15,18 +9,6 @@ router.get('/', (req, res) => {
     message: 'connected /oauth GET'
   });
 });
-
-// router.get('/twitter', (req, res) => {
-//   res.status(200).json({
-//     message: 'connected /oauth/twitter GET'
-//   });
-// });
-
-// router.post('/twitter/authenticatedCallback', (req, res) => {
-//   res.status(200).json({
-//     message: 'connected /oauth/twitter/authenticatedCallback POST'
-//   });
-// });
 
 router.get('/twitter', passport.authenticate('twitter'));
 
@@ -43,7 +25,6 @@ router.get('/facebook', (req, res) => {
   });
 });
 
-// authfacebookcallback
 router.post('/facebook/authenticatedCallback', (req, res) => {
   res.status(200).json({
     message: 'connected /oauth/facebook/authenticatedCallback POST'
