@@ -37,9 +37,9 @@ router.get('/twitter/authenticatedCallback',
   }
 );
 
-app.get('/facebook', passport.authenticate('facebook'));
+router.get('/facebook', passport.authenticate('facebook'));
 
-app.get('/facebook/authenticatedCallback', 
+router.get('/facebook/authenticatedCallback', 
   passport.authenticate('facebook', { failureRedirect: '/'}),
   function(req, res) {    
     res.redirect('/');
