@@ -1,7 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const GithubStrategy = require('passport-github').Strategy;
-const FacebookStrategy = require('passport-facebook').Strategy;
+// const FacebookStrategy = require('passport-facebook').Strategy;
 const OAuthStrategy = require('passport-oauth').OAuthStrategy;
 const session = require('express-session');
 const PORT = process.env.PORT || 3000;
