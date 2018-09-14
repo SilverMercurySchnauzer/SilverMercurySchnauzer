@@ -21,7 +21,12 @@ class NavBar extends React.Component {
   }
 
   toggleDrawer() {
-    this.setState({ drawerOpen: !this.state.drawerOpen });
+    if (this.state.drawerOpen) {
+      this.setState({ drawerOpen: !this.state.drawerOpen }, 
+        this.props.history.push('/feed'));
+    } else {
+      this.setState({ drawerOpen: !this.state.drawerOpen });
+    }
   }
 
   handleLogout() {
@@ -46,7 +51,7 @@ class NavBar extends React.Component {
                   <ListItemIcon>
                     <CreateIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Create New Post" />
+                  <ListItemText primary="Create New Post" onClick={ () => this.props.history.push('/createpost') }/>
                 </ListItem>
                 <ListItem button divider>
                   <ListItemIcon>
