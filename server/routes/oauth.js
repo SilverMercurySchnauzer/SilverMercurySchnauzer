@@ -15,7 +15,7 @@ router.get('/twitter', passport.authenticate('twitter'));
 router.get('/twitter/authenticatedCallback', 
   passport.authenticate('twitter', { failureRedirect: '/'}),
   function(req, res) {
-    res.redirect('/');
+    res.send();
   }
 );
 

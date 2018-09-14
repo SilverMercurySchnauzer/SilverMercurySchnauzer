@@ -29,7 +29,7 @@ router.get('/publish/twitter', function(req, res) {
       console.log('Used twitter oauth headers: ', twitter.oauth);
       console.log('ERROR: ', e);
       console.log('Body: ', body);
-      res.redirect('/');
+      res.send();
     })
 });
 

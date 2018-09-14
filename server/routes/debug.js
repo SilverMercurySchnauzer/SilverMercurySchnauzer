@@ -10,7 +10,7 @@ router.get('/log/credentials', function(req, res) {
   // console.log(facebookProfile);
   // console.log('accessToken: ', fb_accessToken);
   // console.log('refreshToken: ', fb_refreshToken);
-  res.redirect('/');
+  res.send();
 });
 
 module.exports = router;
