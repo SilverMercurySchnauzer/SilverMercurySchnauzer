@@ -87,5 +87,3 @@ app.get('/auth/github/callback',
 var server = app.listen(PORT, function() {
   console.log('Example app listening at http://%s:%s', server.address().address, server.address().port);
 })
-
-console.log(host, process.env.host);
