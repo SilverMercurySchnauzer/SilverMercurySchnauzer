@@ -60,4 +60,18 @@ exports.validateUser = (loginName, loginPassword, callback) => {
     });
 };
     
+exports.savePost = (userId, text, mediaUrl, date, callback) => {
+  console.log('args for save post-->', userId, post, mediaUrl, date);
+  const queryString = `INSERT INTO posts (user_id, text, media_url, post_date) values ($1, $2, $3, $4)`;
+  pool.query(queryString, [userId, text, mediaUrl, date], (err, results) => {
+   console.log('results after saving in DB-->', results);
+    if (err) {
+      callback(err, null)
+    } else {
+      callback(null, results)
+    }
+  })
+}
   
+
+
