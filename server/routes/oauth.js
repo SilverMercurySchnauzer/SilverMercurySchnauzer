@@ -31,29 +31,4 @@ router.post('/facebook/authenticatedCallback', (req, res) => {
   });
 });
 
-// passport.serializeUser(function(user, done) {
-//   // placeholder for custom user serialization
-//   // null is for errors
-//   done(null, user);
-// });
-
-// passport.deserializeUser(function(user, done) {
-//   // placeholder for custom user deserialization.
-//   // maybe you are going to get the user from mongo by id?
-//   // null is for errors
-//   done(null, user);
-// });
-
-// function ensureAuthenticated(req, res, next) {
-//   if (req.isAuthenticated()) {
-//     return next();
-//   }
-
-//   res.redirect('/')
-// }
-
-// app.get('/protected', ensureAuthenticated, function(req, res) {
-//   res.send('access granted. secure stuff happens here');
-// });
-
 module.exports = router;
