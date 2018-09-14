@@ -18,7 +18,7 @@ let fbOauth =
 const facebook = new FacebookStrategy({
     clientID: process.env.fbClientID,
     clientSecret: process.env.fbClientSecret,
-    callbackURL: "https://pure-river-11017.herokuapp.com/auth/facebook/callback"
+    callbackURL: "https://pure-river-11017.herokuapp.com/api/oauth/facebook/authenticatedCallback"
   },
   function(accessToken, refreshToken, profile, done) {
     fbOauth.accessToken = accessToken;
