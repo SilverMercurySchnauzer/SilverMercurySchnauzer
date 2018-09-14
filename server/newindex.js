@@ -58,6 +58,7 @@ app.get('/', function (req, res) {
   <li><a href='/api/oauth/facebook'>Facebook</a></li>\n
   <li><a href='/api/oauth/twitter'>Twitter</a></li>\n
   <li><a href='/api/createPost/publish/twitter'>Tweet</a></li>\n
+  <li><a href='/api/createPost/publish/facebook'>Comment</a></li>\n
   <li><a href='/api/home/updateTwitterFeed'>Update</a></li>\n
   <li><a href='/api/debug/log/credentials'>DEBUG:Credentials</a></li>\n
   <li><a href='/logout'>logout</a></li></ul>`;
