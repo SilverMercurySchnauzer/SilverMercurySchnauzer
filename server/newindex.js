@@ -40,19 +40,6 @@ passport.use(new GithubStrategy({
   }
 ));
 
-passport.use(new FacebookStrategy({
-    clientID: process.env.fb_clientID,
-    clientSecret: process.env.fb_clientSecret,
-    callbackURL: "https://pure-river-11017.herokuapp.com/auth/facebook/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
-    fb_accessToken = accessToken;
-    fb_refreshToken = refreshToken;
-    facebookProfile = profile;
-    return done(null, profile);
-  }
-));
-
 passport.serializeUser(function(user, done) {
   // placeholder for custom user serialization
   // null is for errors
@@ -68,7 +55,7 @@ passport.deserializeUser(function(user, done) {
 
 app.get('/', function (req, res) {
   var html = `<ul><li><a href='/auth/github'>GitHub</a></li>\n
-  <li><a href='/auth/facebook'>Facebook</a></li>\n
+  <li><a href='/api/oauth/facebook'>Facebook</a></li>\n
   <li><a href='/api/oauth/twitter'>Twitter</a></li>\n
   <li><a href='/api/createPost/publish/twitter'>Tweet</a></li>\n
   <li><a href='/api/home/updateTwitterFeed'>Update</a></li>\n
@@ -93,15 +80,6 @@ app.get('/auth/github', passport.authenticate('github'));
 app.get('/auth/github/callback', 
   passport.authenticate('github', { failureRedirect: '/'}),
   function(req, res) {
-    res.redirect('/');
-  }
-);
-
-app.get('/auth/facebook', passport.authenticate('facebook'));
-
-app.get('/auth/facebook/callback', 
-  passport.authenticate('facebook', { failureRedirect: '/'}),
-  function(req, res) {    
     res.redirect('/');
   }
 );

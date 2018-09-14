@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/index.js && webpack -d --watch",
+    "start": "nodemon server/newindex.js && webpack -d --watch",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js"
   },

@@ -2,7 +2,7 @@ const router = require('express').Router();
 const passport = require('passport');
 // const GithubStrategy = require('passport-github').Strategy;
 const twitter = require('../../utility/passport/twitter');
-// const FacebookStrategy = require('passport-facebook').Strategy;
+const facebook = require('../../utility/passport/facebook');
 // const OAuthStrategy = require('passport-oauth').OAuthStrategy;
 const session = require('express-session');
 // const request = require('request');
@@ -37,17 +37,26 @@ router.get('/twitter/authenticatedCallback',
   }
 );
 
-router.get('/facebook', (req, res) => {
-  res.status(200).json({
-    message: 'connected /oauth/facebook GET'
-  });
-});
+app.get('/facebook', passport.authenticate('facebook'));
 
-router.post('/facebook/authenticatedCallback', (req, res) => {
-  res.status(200).json({
-    message: 'connected /oauth/facebook/authenticatedCallback POST'
-  });
-});
+app.get('/facebook/authenticatedCallback', 
+  passport.authenticate('facebook', { failureRedirect: '/'}),
+  function(req, res) {    
+    res.redirect('/');
+  }
+);
+
+// router.get('/facebook', (req, res) => {
+//   res.status(200).json({
+//     message: 'connected /oauth/facebook GET'
+//   });
+// });
+
+// router.post('/facebook/authenticatedCallback', (req, res) => {
+//   res.status(200).json({
+//     message: 'connected /oauth/facebook/authenticatedCallback POST'
+//   });
+// });
 
 // passport.serializeUser(function(user, done) {
 //   // placeholder for custom user serialization
