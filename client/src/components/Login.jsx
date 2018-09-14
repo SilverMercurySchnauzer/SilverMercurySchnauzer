@@ -69,6 +69,7 @@ class Login extends React.Component {
           localStorage.setItem('userId', response.data.userId);
           this.props.history.push('/feed');
         } else {
+          alert('Wrong Password');
           this.resetForm();
         }
       })

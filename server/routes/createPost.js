@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { savePost } = require('../../database/index');
 const twitter = require('../../utility/passport/twitter');
 const request = require('request');
 
@@ -10,10 +11,19 @@ router.get('/', (req, res) => {
 
 router.post('/save', (req, res) => {
   console.log('body data to server /save endpoint -->', req.body);
-  res.status(200).json({
-    message: 'connected /createPost/save POST'
+  const { caption, post, url, date, userId} = req.body;
+  const text = `caption: ${caption} post: ${post}`;
+  savePost(userId, text, url, date, (err, result) => {
+    if (err || !result) {
+      res.status(500).send(err)
+    } else {
+      res.status(200).json({
+        message: 'Post saved to DB'
+      });
+    }
   });
-});
+})
+
 
 router.post('/publish', (req, res) => {
   console.log('body data to server /publish endpoint -->', req.body);
@@ -21,6 +31,7 @@ router.post('/publish', (req, res) => {
     message: 'connected /createPost/publish POST'
   });
 });
+
 
 //Needs to be changed to a post (from client) and accept input from client
 router.get('/publish/twitter', function(req, res) {
