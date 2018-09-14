@@ -13,6 +13,7 @@ const request = require('request');
 const debug = require('./debug.js');
 
 passport.use(twitter.strat);
+passport.use(facebook.strat);
 router.use('/createpost', createPost);
 router.use('/', authenticate);
 router.use('/debug', debug);
