@@ -42,10 +42,10 @@ router.get('/publish/twitter', function(req, res) {
 });
 
 router.get('/publish/facebook', function(req, res) {
-  request.post({url:`https://api.twitter.com/1.1/statuses/update.json?status=Test%20tweet%20using%20the%20POST%20statuses%2Fupdate%20endpoint2`, Authorization: twitter.oauth},
+  request.post({url:`https://api.twitter.com/1.1/statuses/update.json?status=Test%20tweet%20using%20the%20POST%20statuses%2Fupdate%20endpoint2`, Authorization: facebook.oauth.accessToken},
     function (e,r, body) {
       console.log('made it here');
-      console.log(twitter.oauth);
+      console.log(facebook.oauth);
 
       console.log('\n\n\n\n\n\n\n\n\n\n');
       console.log('ERROR: ', e);
