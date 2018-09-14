@@ -3,7 +3,7 @@ const authenticate = require('./authenticate.js');
 const createPost = require('./createPost.js');
 const db = require('../../database');
 const twitter = require('../../utility/passport/twitter');
-const facebook = require('../../utility/passport/facebook');
+//const facebook = require('../../utility/passport/facebook');
 const passport = require('passport');
 require('dotenv').config();
 const session = require('express-session');
