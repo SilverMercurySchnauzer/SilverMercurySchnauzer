@@ -37,8 +37,7 @@ class Feed extends React.Component {
         if (validationStatus.data === 'fullyAuthenticated') {
           this.setState({
             authenticated: true,
-            loading: false
-          });
+          }, this.populateFeed);
         } else if (validationStatus.data === 'onlyNative') {
           this.props.history.push('/oauth');
         } else {
