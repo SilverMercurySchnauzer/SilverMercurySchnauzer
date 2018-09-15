@@ -66,12 +66,21 @@ exports.savePost = (userId, text, mediaUrl, date, callback) => {
   pool.query(queryString, [userId, text, mediaUrl, date], (err, results) => {
    console.log('results after saving in DB-->', results);
     if (err) {
-      callback(err, null)
+      callback(err, null);
     } else {
-      callback(null, results)
+      callback(null, results);
     }
-  })
+  });
 }
-  
 
-
+exports.checkOauthTokens = (userId, callback) => {
+  const queryString = `SELECT COUNT(*) FROM tokens WHERE user_id = $1 GROUP BY user_id;`;
+  pool.query(queryString, [userId], (err, tokenCount) => {
+    let hasTokens = tokenCount && tokenCount.rows[0] ? !!tokenCount.rows[0].count : false;
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, hasTokens);
+    }
+  });
+};
