@@ -18,6 +18,7 @@ CREATE TABLE posts
 (
   id SERIAL PRIMARY KEY,
   user_id INT,
+  caption,
   text TEXT,
   media_url TEXT,
   media_pic BYTEA,
