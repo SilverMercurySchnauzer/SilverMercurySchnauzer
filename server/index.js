@@ -5,9 +5,9 @@ const bodyParser = require('body-parser');
 const routes = require('./routes/routes.js');
 const app = express();
 const path = require('path');
-require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 const session = require('express-session');
+const db = require('../database/index.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
@@ -17,13 +17,23 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use('/api', routes);
 
-app.get('/validateuser' , (req, res) => {
-  if (req.query.token) {
-    res.send(true).status(200);
+app.post('/validateuser' , (req, res) => {
+  if (req.body.nativeToken) {
+    db.checkOauthTokens(req.body.userId, (err, hasOauthTokens) => {
+      if (err) {
+        res.sendStatus(500);
+      } else {
+        if (hasOauthTokens) {
+          res.send('fullyAuthenticated').status(200);
+        } else {
+          res.send('onlyNative').status(200);
+        }
+      }
+    });
   } else {
-    res.send(false).status(200);
+    res.send('noAuthentication').status(200);
   }
-
+  
 });
 
 // Needed to handle page refresh when using React Router
