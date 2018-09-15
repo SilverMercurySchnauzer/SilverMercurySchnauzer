@@ -37,28 +37,17 @@ class Login extends React.Component {
       userId: localStorage.getItem('userId') 
     })
     .then((validationStatus) => {
-      console.log('validationstatus: ', validationStatus);
       if (validationStatus.data === 'fullyAuthenticated') {
         this.props.history.push('/feed');
       } else if (validationStatus.data === 'onlyNative') {
         this.props.history.push('/oauth');
       } else {
         this.setState({
-          authenticated: false
+          authenticated: false,
+          loading: false
         });
       }
     })
-    if (localStorage.getItem('token')) {
-      this.setState({
-        authenticated: true,
-        loading: false
-      });
-    } else {
-      this.setState({
-        authenticated: false,
-        loading: false
-      })
-    }
   }
 
   setloginName(e) {
@@ -79,7 +68,6 @@ class Login extends React.Component {
       password: this.state.loginPassword
     })
       .then(response => {
-        console.log('response.data.message: ', response.data.message);
         if (response.data.message !== 'Wrong Password') {
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('userId', response.data.userId);

@@ -16,7 +16,7 @@ class App extends React.Component {
       items: [1, 2, 3, 4, 5],
       token: null,
       hasMounted: false,
-      authenticated: false,
+      authStatus: false,
       loading: false
     }
 
@@ -32,17 +32,28 @@ class App extends React.Component {
   }
 
   handleValidation() {
-    axios.get('/validateuser', { params: { token: localStorage.getItem('token') } } )
-      .then(authStatus => {
-        this.setState({ 
-          loading: false,
-          authenticated: authStatus.data
-         });
+    axios.post('/validateuser', {
+      nativeToken: localStorage.getItem('token'),
+      userId: localStorage.getItem('userId')
+    })
+      .then((validationStatus) => {
+        if (validationStatus.data === 'fullyauthStatus') {
+          this.setState({
+            authStatus: 'fullyAuthenticated',
+            loading: false
+          });
+        } else if (validationStatus.data === 'onlyNative') {
+          this.setState({
+            authStatus: 'onlyNative',
+            loading: false
+          });
+        } else {
+          this.setState({
+            authStatus: 'none',
+            loading: false
+          });
+        }
       })
-      .catch(err => {
-        console.log('err: ', err);
-        console.log('Unable to authenticate user on server: ', err);
-      });
   }
 
   render () {
@@ -57,8 +68,11 @@ class App extends React.Component {
           <Redirect to='/' />
         </Switch>
 
-        {this.state.loading ? <LoadingScreen /> : 
-          this.state.authenticated ? <Redirect to='/feed' /> : <Redirect to='/login' /> }
+      { this.state.loading ? <LoadingScreen /> : 
+          this.state.authStatus === 'fullyAuthenticated' ? <Redirect to='/feed' /> :
+            this.state.authStatus === 'onlyNative' ? <Redirect to='/oauth' /> :
+            <Redirect to='/login' />
+      }
       </div>
     );
   }
