@@ -32,6 +32,22 @@ class Login extends React.Component {
   }
 
   handleValidation() {
+    axios.post('/validateuser', { 
+      nativeToken: localStorage.getItem('token'), 
+      userId: localStorage.getItem('userId') 
+    })
+    .then((validationStatus) => {
+      console.log('validationstatus: ', validationStatus);
+      if (validationStatus.data === 'fullyAuthenticated') {
+        this.props.history.push('/feed');
+      } else if (validationStatus.data === 'onlyNative') {
+        this.props.history.push('/oauth');
+      } else {
+        this.setState({
+          authenticated: false
+        });
+      }
+    })
     if (localStorage.getItem('token')) {
       this.setState({
         authenticated: true,
@@ -67,7 +83,7 @@ class Login extends React.Component {
         if (response.data.message !== 'Wrong Password') {
           localStorage.setItem('token', response.data.token);
           localStorage.setItem('userId', response.data.userId);
-          this.props.history.push('/feed');
+          this.handleValidation();
         } else {
           alert('Wrong Password');
           this.resetForm();
@@ -89,10 +105,6 @@ class Login extends React.Component {
     if (this.state.loading) {
       return ( <LoadingScreen /> );
     } else {
-      if (this.state.authenticated) {
-        return ( <Redirect to='/feed' /> );
-      }
-
       return (
         <div className='login-container'>
           <div className='login-form-container' style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
