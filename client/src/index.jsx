@@ -37,13 +37,22 @@ class App extends React.Component {
       userId: localStorage.getItem('userId')
     })
       .then((validationStatus) => {
-        this.setState({
-          authStatus: validationStatus.data,
-          loading: false
-        });
-      })
-      .catch((err) => {
-        console.log('error retrieving user auth status: ', err);
+        if (validationStatus.data === 'fullyauthStatus') {
+          this.setState({
+            authStatus: 'fullyAuthenticated',
+            loading: false
+          });
+        } else if (validationStatus.data === 'onlyNative') {
+          this.setState({
+            authStatus: 'onlyNative',
+            loading: false
+          });
+        } else {
+          this.setState({
+            authStatus: 'none',
+            loading: false
+          });
+        }
       })
   }
 
