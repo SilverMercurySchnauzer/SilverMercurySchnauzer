@@ -29,17 +29,21 @@ class Feed extends React.Component {
   }
 
   handleValidation() {
-    if (localStorage.getItem('token')) {
-      this.setState({
-        authenticated: true,
-        loading: false
-      });
-    } else {
-      this.setState({
-        authenticated: false,
-        loading: false
+    axios.post('/validateuser', {
+      nativeToken: localStorage.getItem('token'),
+      userId: localStorage.getItem('userId')
+    })
+      .then((validationStatus) => {
+        if (validationStatus.data === 'fullyAuthenticated') {
+          this.setState({
+            authenticated: true,
+          }, this.populateFeed);
+        } else if (validationStatus.data === 'onlyNative') {
+          this.props.history.push('/oauth');
+        } else {
+          this.props.history.push('/login');
+        }
       })
-    }
   }
 
   render() {
