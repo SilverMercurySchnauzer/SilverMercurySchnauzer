@@ -41,6 +41,8 @@ class App extends React.Component {
           authStatus: validationStatus.data,
           loading: false
         });
+      .catch((err) => {
+        console.log('error retrieving user auth status: ', err);
       })
   }
 
