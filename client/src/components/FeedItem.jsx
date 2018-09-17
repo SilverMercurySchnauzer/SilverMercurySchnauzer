@@ -2,17 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ExandIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import WhatsHotIcon from '@material-ui/icons/WhatsHot';
 import { Avatar, Card, CardHeader, CardMedia, CardContent, CardActions, CardActionArea, Collapse, IconButton, Typography } from '@material-ui/core';
 
 class FeedItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      item: this.props.item,
+      item: this.props.tweet,
       expanded: false
     };
-
+    console.log('tweet: ', this.state.item);
     this.handleExpandClick = this.handleExpandClick.bind(this);
   }
 
@@ -28,7 +27,7 @@ class FeedItem extends React.Component {
         <Card style={{ backgroundColor: '#3f51b5', marginRight: 'auto', marginLeft: 'auto', marginTop: '5px', marginBottom: '5px', width: '80%' }}>
           <CardHeader
             avatar={
-              <Avatar src='https://copelandcommunications.files.wordpress.com/2010/09/free-fat-twitter-bird-icon.png?w=450'>
+              <Avatar src={this.state.item.user.profile_image_url}>
                 P
               </Avatar>
             }
@@ -37,13 +36,22 @@ class FeedItem extends React.Component {
                 <MoreVertIcon />
               </IconButton>
             }
-            title="Social Media Post"
-            subheader="A date will be here"
+            title={`@${this.state.item.user.screen_name}`}
+            subheader={this.state.item.created_at}
+            
           />
-          <CardMedia
+          <Typography paragraph variant='body2' style={{ marginLeft: '15px', marginTop: '5px', marginBottom: '5px', width: '80%' }}>
+            {this.state.item.text}
+          </Typography>
+          <br />
+          <Typography paragraph variant='body2' style={{ marginLeft: '15px', marginTop: '5px', marginBottom: '5px', width: '80%' }}>
+            {'Retweets: ' + this.state.item.retweet_count + ' Favorites: ' + this.state.item.favorite_count}
+          </Typography>
+
+          {/* <CardMedia
             style={{height: '100px', width: '100px', marginLeft: '30px'}}
             image="https://thumbs.dreamstime.com/z/retro-bicycle-nature-background-autumn-49743173.jpg"
-          />
+          /> */}
           <CardContent>
           </CardContent>
           <CardActions disableActionSpacing>
@@ -55,14 +63,11 @@ class FeedItem extends React.Component {
           </CardActions>
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
             <CardContent>
-              <Typography paragraph variant="body2">
-                blah blah blah
-              </Typography>
-              <Typography paragraph>
+              {/* <Typography paragraph>
                Post Content will go here. Item number: 
                 {this.state.item}
-              </Typography>
-
+              </Typography> */}
+              {/* {'Retweets: ' + this.state.item.retweet_count + ' Favorites: ' + this.state.item.favorite_count} */}
             </CardContent>
           </Collapse>
         </Card>
