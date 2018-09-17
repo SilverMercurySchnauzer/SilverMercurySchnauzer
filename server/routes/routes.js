@@ -58,11 +58,12 @@ router.get('/home', (req, res) => {
     res.status(200).json({message: 'connected /api/home GET'});
 });
 
-router.get('/home/updateTwitterFeed', function (req, res) {
-  request.get({url:`https://api.twitter.com/1.1/statuses/user_timeline.json`, oauth: twitter.oauth},
-    function (error, response, body) {
-      res.send(body);
-    })
+router.get('/home/updateTwitterFeed', (req, res) => {
+  request.get({url:`https://api.twitter.com/1.1/statuses/user_timeline.json`, oauth: twitter.oauth}, (error, response, body) => {
+    // pull out required info from each tweet object and send back
+    let tweets = null;
+    res.send(tweets).status(200);
+  })
 });
 
 router.get('/drafts', (req, res) => {

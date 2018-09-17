@@ -18,6 +18,7 @@ class Feed extends React.Component {
     }
 
     this.handleValidation = this.handleValidation.bind(this);
+    this.populateFeed = this.populateFeed.bind(this);
   }
 
   componentDidMount() {
@@ -43,6 +44,18 @@ class Feed extends React.Component {
         } else {
           this.props.history.push('/login');
         }
+      })
+  }
+
+  populateFeed() {
+    axios.get('/home/updateTwitterFeed')
+      .then((tweets) => {
+        this.setState({
+          items: tweets.data
+        })
+      })
+      .catch((err) => {
+        console.log('Error retrieving tweets for user: ', err);
       })
   }
 
