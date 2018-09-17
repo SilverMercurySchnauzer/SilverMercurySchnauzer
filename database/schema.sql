@@ -24,7 +24,7 @@ CREATE TABLE posts
   media_url TEXT,
   media_pic BYTEA,
   media_video BYTEA,
-  post_date date
+  post_date timestamp
 );
 
 ALTER TABLE tokens ADD CONSTRAINT tokens_fk0 FOREIGN KEY (user_id) REFERENCES users(id);

@@ -11,8 +11,10 @@ router.get('/', (req, res) => {
 
 router.post('/save', (req, res) => {
   console.log('body data to server /save endpoint -->', req.body);
+  console.log('date format coming to server-->', req.body.date);
   const { caption, post, url, date, userId } = req.body;
   savePost(userId, caption, post, url, date, (err, result) => {
+
     if (err || !result) {
       res.status(500).send(err)
     } else {

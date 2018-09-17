@@ -16,6 +16,7 @@ insert into items("imgUrl") VALUES ('testers2');
 
 heroku CLI:
 heroku pg:psql -f schema.sql  // add schema to heroku pg database
+heroku pg:psql  // command for starting database
 heroku logs --tail // see heroku server logs for app
 heroku login // if you are working on a different computer than normal
 heroku open // open app in new browser tab

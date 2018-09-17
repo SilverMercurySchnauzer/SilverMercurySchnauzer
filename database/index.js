@@ -19,7 +19,7 @@ const pool = new Pool({
 
 
 exports.selectAll = callback => {
-  pool.query('SELECT * FROM items', (err, results, fields) => {
+  pool.query('SELECT * FROM posts', (err, results, fields) => {
     if (err) {
       callback(err, null);
     } else {
@@ -61,7 +61,7 @@ exports.validateUser = (loginName, loginPassword, callback) => {
 };
     
 exports.savePost = (userId, caption, text, mediaUrl, date, callback) => {
-  console.log('args for savePost in DB-->', userId, caption, text, mediaUrl, date );
+  console.log('args for date in DB-->', date );
   const queryString = `INSERT INTO posts (user_id, caption, text, media_url, post_date) values ($1, $2, $3, $4, $5)`;
   pool.query(queryString, [userId, caption, text, mediaUrl, date], (err, results) => {
    console.log('results after saving in DB-->', results);
