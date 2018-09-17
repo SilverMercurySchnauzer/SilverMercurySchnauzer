@@ -27,7 +27,7 @@ class FeedItem extends React.Component {
         <Card style={{ backgroundColor: '#3f51b5', marginRight: 'auto', marginLeft: 'auto', marginTop: '5px', marginBottom: '5px', width: '80%' }}>
           <CardHeader
             avatar={
-              <Avatar src='https://copelandcommunications.files.wordpress.com/2010/09/free-fat-twitter-bird-icon.png?w=450'>
+              <Avatar src={this.state.item.user.profile_image_url}>
                 P
               </Avatar>
             }
