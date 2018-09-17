@@ -8,7 +8,7 @@ class FeedItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      item: this.props.tweet,
+      feedItem: this.props.tweet,
       expanded: false
     };
     this.handleExpandClick = this.handleExpandClick.bind(this);
@@ -26,7 +26,7 @@ class FeedItem extends React.Component {
         <Card style={{ backgroundColor: '#3f51b5', marginRight: 'auto', marginLeft: 'auto', marginTop: '5px', marginBottom: '5px', width: '80%' }}>
           <CardHeader
             avatar={
-              <Avatar src={this.state.item.user.profile_image_url}>
+              <Avatar src={this.state.feedItem.user.profile_image_url}>
                 P
               </Avatar>
             }
@@ -35,19 +35,21 @@ class FeedItem extends React.Component {
                 <MoreVertIcon />
               </IconButton>
             }
-            title={`@${this.state.item.user.screen_name}`}
-            subheader={this.state.item.created_at}
+            title={`@${this.state.feedItem.user.screen_name}`}
+            subheader={this.state.feedItem.created_at}
             
           />
           <Typography paragraph variant='body2' style={{ marginLeft: '15px', marginTop: '5px', marginBottom: '5px', width: '80%' }}>
-            {this.state.item.text}
+            {this.state.feedItem.text}
           </Typography>
           <br />
           <Typography paragraph variant='body2' style={{ marginLeft: '15px', marginTop: '5px', marginBottom: '5px', width: '80%' }}>
-            {'Retweets: ' + this.state.item.retweet_count + ' Favorites: ' + this.state.item.favorite_count}
+            {'Retweets: ' + this.state.feedItem.retweet_count + ' Favorites: ' + this.state.feedItem.favorite_count}
           </Typography>
-
-          {/* <CardMedia
+          
+          
+          {/* Below example renders content
+          <CardMedia
             style={{height: '100px', width: '100px', marginLeft: '30px'}}
             image="https://thumbs.dreamstime.com/z/retro-bicycle-nature-background-autumn-49743173.jpg"
           /> */}
@@ -64,9 +66,9 @@ class FeedItem extends React.Component {
             <CardContent>
               {/* <Typography paragraph>
                Post Content will go here. Item number: 
-                {this.state.item}
+                {this.state.feedItem}
               </Typography> */}
-              {/* {'Retweets: ' + this.state.item.retweet_count + ' Favorites: ' + this.state.item.favorite_count} */}
+              {/* {'Retweets: ' + this.state.feedItem.retweet_count + ' Favorites: ' + this.state.feedItem.favorite_count} */}
             </CardContent>
           </Collapse>
         </Card>
