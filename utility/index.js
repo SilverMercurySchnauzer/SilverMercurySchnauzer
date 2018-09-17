@@ -22,6 +22,7 @@ let tweetFields = [
 
 function scrapeObj (fieldNames, inputObj) {
   let outputObj = {};
+  console.log(inputObj);
   for (let i = 0; i < fieldNames.length; i++) {
     if(fieldNames[i] in inputObj) {
       outputObj[fieldNames[i]] = inputObj[fieldNames[i]];
