@@ -40,9 +40,13 @@ class FeedItem extends React.Component {
             subheader={this.state.item.created_at}
             
           />
-          <Typography paragraph variant="body2" style={{ marginLeft: '15px', marginTop: '5px', marginBottom: '5px', width: '80%' }}>
+          <Typography paragraph variant='body2' style={{ marginLeft: '15px', marginTop: '5px', marginBottom: '5px', width: '80%' }}>
             {this.state.item.text}
           </Typography>
+          <Typography paragraph variant='body2' >
+            {'Retweets: ' + this.state.item.retweet_count + ' Favorites: ' + this.state.item.favorite_count}
+          </Typography>
+
           {/* <CardMedia
             style={{height: '100px', width: '100px', marginLeft: '30px'}}
             image="https://thumbs.dreamstime.com/z/retro-bicycle-nature-background-autumn-49743173.jpg"
@@ -58,14 +62,11 @@ class FeedItem extends React.Component {
           </CardActions>
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
             <CardContent>
-              <Typography paragraph variant="body2">
-                {this.state.item.text}
-              </Typography>
               {/* <Typography paragraph>
                Post Content will go here. Item number: 
                 {this.state.item}
               </Typography> */}
-              {'Retweets: ' + this.state.item.retweet_count + ' Favorites: ' + this.state.item.favorite_count}
+              {/* {'Retweets: ' + this.state.item.retweet_count + ' Favorites: ' + this.state.item.favorite_count} */}
             </CardContent>
           </Collapse>
         </Card>
