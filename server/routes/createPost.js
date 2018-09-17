@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { savePost } = require('../../database/index');
+const { savePost, retrieveTokens } = require('../../database/index');
 const twitter = require('../../utility/passport/twitter');
 const request = require('request');
 
