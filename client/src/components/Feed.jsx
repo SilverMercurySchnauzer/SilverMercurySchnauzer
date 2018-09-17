@@ -53,6 +53,8 @@ class Feed extends React.Component {
         this.setState({
           items: tweets.data,
           loading: false
+        }, () => {
+          console.log('tweets: ', tweets.data);
         })
       })
       .catch((err) => {
