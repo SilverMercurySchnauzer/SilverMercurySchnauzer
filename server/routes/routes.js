@@ -66,7 +66,6 @@ router.get('/home/updateTwitterFeed/:userId', (req, res) => {
     if (err) {
       console.log('Database/Server Error on retrieveTokens: ', err);
     } else {
-      console.log(results);
       oauth.token = results.rows[0].twitter_token; 
       oauth.token_secret = results.rows[0].twitter_token_secret;
       request.get({url:`https://api.twitter.com/1.1/statuses/user_timeline.json`, oauth: oauth}, (error, response, body) => {
