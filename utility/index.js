@@ -37,7 +37,7 @@ function scrapeArr (fieldNames, inputArr) {
     outputArr.push(scrapeObj(fieldNames, inputArr[j]))
   }
   return outputArr;
-}
+}.bind(this);
 
 module.exports = {
   tweetFields: tweetFields,
