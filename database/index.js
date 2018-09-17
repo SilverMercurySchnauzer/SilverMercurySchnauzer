@@ -108,3 +108,14 @@ exports.updateToken = (userId, tokenObj, callback) => {
     }
   })
 }
+
+exports.retrieveTokens = (userId, callback) => {
+  pool.query('SELECT * FROM tokens WHERE user_id = ${userId}', function(err, results) {
+    if (err) {
+      console.log('Database Error on retrieveTokens: ', err);
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  })
+}

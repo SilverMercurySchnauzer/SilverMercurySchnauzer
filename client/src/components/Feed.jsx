@@ -48,7 +48,7 @@ class Feed extends React.Component {
   }
 
   populateFeed() {
-    axios.get('/home/updateTwitterFeed')
+    axios.get(`/api/home/updateTwitterFeed/${localStorage.getItem('userId')}`)
       .then((tweets) => {
         this.setState({
           items: tweets.data
