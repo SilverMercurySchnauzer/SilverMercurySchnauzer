@@ -60,25 +60,6 @@ router.get('/home', (req, res) => {
     res.status(200).json({message: 'connected /api/home GET'});
 });
 
-function scrapeObj (fieldNames, inputObj) {
-  let outputObj = {};
-  console.log(inputObj);
-  for (let i = 0; i < fieldNames.length; i++) {
-    if(fieldNames[i] in inputObj) {
-      outputObj[fieldNames[i]] = inputObj[fieldNames[i]];
-    }
-  }
-  return outputObj;
-}
-
-function scrapeArr (fieldNames, inputArr) {
-  let outputArr = [];
-  for (let j = 0; j < inputArr.length; j++) {
-    outputArr.push(scrapeObj(fieldNames, inputArr[j]))
-  }
-  return outputArr;
-}
-
 router.get('/home/updateTwitterFeed/:userId', (req, res) => {
   let userId = req.params.userId;
   let oauth = twitter.oauth;
@@ -89,9 +70,8 @@ router.get('/home/updateTwitterFeed/:userId', (req, res) => {
       oauth.token = results.rows[0].twitter_token; 
       oauth.token_secret = results.rows[0].twitter_token_secret;
       request.get({url:`https://api.twitter.com/1.1/statuses/user_timeline.json`, oauth: oauth}, (error, response, body) => {
-        // console.log(body);
         // pull out required info from each tweet object and send back
-        let tweets = scrapeArr(util.tweetFields, JSON.parse(body));
+        let tweets = util.scrapeArr(util.tweetFields, JSON.parse(body));
         res.send(tweets).status(200);
       })      
     }

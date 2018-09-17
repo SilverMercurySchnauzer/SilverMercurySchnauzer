@@ -3,11 +3,11 @@ let tweetFields = [
   'id', 
   'id_str', 
   'text', 
-  'in_reply_to_status_id', 
-  'in_reply_to_status_id_str', 
-  'in_reply_to_user_id', 
-  'in_reply_to_user_id_str', 
-  'in_reply_to_screen_name', 
+  // 'in_reply_to_status_id', 
+  // 'in_reply_to_status_id_str', 
+  // 'in_reply_to_user_id', 
+  // 'in_reply_to_user_id_str', 
+  // 'in_reply_to_screen_name', 
   'user',
   'extended_tweet',
   'extended_tweet.full_text',
@@ -17,7 +17,8 @@ let tweetFields = [
   // 'user.screen_name', 
   'quote_count', 
   'reply_count', 
-  'retweet_count', 
+  'retweet_count',
+  'favorite_count', 
   'entities' ];
 
 function scrapeObj (fieldNames, inputObj) {
