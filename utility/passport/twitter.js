@@ -4,14 +4,14 @@ require('dotenv').config();
 let twitterProfile = {};
 let twOauth = 
 { 
-  consumer_key: `${process.env.tw_consumer_key}`,
-  consumer_secret: `${process.env.tw_consumer_secret}`
+  consumer_key: `${process.env.twConsumerKey}`,
+  consumer_secret: `${process.env.twConsumerSecret}`
 };
 
 const twitter = new TwitterStrategy({
-    consumerKey: process.env.tw_consumer_key,
-    consumerSecret: process.env.tw_consumer_secret,
-    callbackURL: `https://${process.env.heroku_app_name}.herokuapp.com/api/oauth/twitter/authenticatedCallback`
+    consumerKey: process.env.twConsumerKey,
+    consumerSecret: process.env.twConsumerSecret,
+    callbackURL: `https://${process.env.herokuAppName}/api/oauth/twitter/authenticatedCallback`
   },
   function(token, tokenSecret, profile, done) {
     twOauth.token = token;

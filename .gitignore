@@ -1,5 +1,7 @@
 node_modules
 .env
 .DS_Store
-client/dist/bundle.js
 server/newindex.js
+package-lock.json
+database/data/
+logfile
