@@ -1,20 +1,18 @@
+/*
+    Currently used to grab required properties from each tweet object from Twitter.
+
+    Can be refactored to grab required properties from each input object.
+    Create new <post>Fields array for each platform.
+*/
+
 let tweetFields = [ 
   'created_at', 
   'id', 
   'id_str', 
-  'text', 
-  // 'in_reply_to_status_id', 
-  // 'in_reply_to_status_id_str', 
-  // 'in_reply_to_user_id', 
-  // 'in_reply_to_user_id_str', 
-  // 'in_reply_to_screen_name', 
+  'text',  
   'user',
   'extended_tweet',
   'extended_tweet.full_text',
-  // 'user.id', 
-  // 'user.id_str', 
-  // 'user.name', 
-  // 'user.screen_name', 
   'quote_count', 
   'reply_count', 
   'retweet_count',
@@ -23,7 +21,7 @@ let tweetFields = [
 
 function scrapeObj (fieldNames, inputObj) {
   let outputObj = {};
-  // console.log(inputObj);
+
   for (let i = 0; i < fieldNames.length; i++) {
     if(fieldNames[i] in inputObj) {
       outputObj[fieldNames[i]] = inputObj[fieldNames[i]];
