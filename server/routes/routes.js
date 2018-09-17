@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const authenticate = require('./authenticate.js');
 const createPost = require('./createPost.js');
-const db = require('../../database');
+const db = require('../../database/index.js');
 const twitter = require('../../utility/passport/twitter');
 //const facebook = require('../../utility/passport/facebook');
 const passport = require('passport');
@@ -66,8 +66,8 @@ router.get('/home/updateTwitterFeed/:userId', (req, res) => {
       console.log('Database/Server Error on retrieveTokens: ', err);
     } else {
       console.log(results);
-      oauth.token = results.data.twitter_token; 
-      oauth.token_secret = results.data.twitter_token_secret;
+      oauth.token = results.data.rows[0].twitter_token; 
+      oauth.token_secret = results.data.rows[0]twitter_token_secret;
       request.get({url:`https://api.twitter.com/1.1/statuses/user_timeline.json`, oauth: oauth}, (error, response, body) => {
         // pull out required info from each tweet object and send back
         let tweets = null;
