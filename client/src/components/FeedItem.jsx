@@ -9,10 +9,10 @@ class FeedItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      item: this.props.item,
+      item: this.props.tweet,
       expanded: false
     };
-
+    console.log('tweet: ', this.state.item);
     this.handleExpandClick = this.handleExpandClick.bind(this);
   }
 
