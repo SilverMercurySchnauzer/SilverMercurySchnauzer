@@ -37,13 +37,13 @@ class FeedItem extends React.Component {
                 <MoreVertIcon />
               </IconButton>
             }
-            title="Social Media Post"
-            subheader="A date will be here"
+            title={`@${this.state.item.user.screen_name}`}
+            subheader={this.state.item.created_at}
           />
-          <CardMedia
+          {/* <CardMedia
             style={{height: '100px', width: '100px', marginLeft: '30px'}}
             image="https://thumbs.dreamstime.com/z/retro-bicycle-nature-background-autumn-49743173.jpg"
-          />
+          /> */}
           <CardContent>
           </CardContent>
           <CardActions disableActionSpacing>
@@ -56,12 +56,12 @@ class FeedItem extends React.Component {
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
             <CardContent>
               <Typography paragraph variant="body2">
-                blah blah blah
+                {this.state.item.text}
               </Typography>
-              <Typography paragraph>
+              {/* <Typography paragraph>
                Post Content will go here. Item number: 
                 {this.state.item}
-              </Typography>
+              </Typography> */}
 
             </CardContent>
           </Collapse>
