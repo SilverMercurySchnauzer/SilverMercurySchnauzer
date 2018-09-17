@@ -10,6 +10,7 @@ const session = require('express-session');
 const request = require('request');
 const debug = require('./debug.js');
 const { retrieveTokens } = require('../../database/index');
+const util = require('../../utility/index');
 
 passport.use(twitter.strat);
 router.use('/createpost', createPost);
@@ -70,8 +71,8 @@ router.get('/home/updateTwitterFeed/:userId', (req, res) => {
       oauth.token_secret = results.rows[0].twitter_token_secret;
       request.get({url:`https://api.twitter.com/1.1/statuses/user_timeline.json`, oauth: oauth}, (error, response, body) => {
         // pull out required info from each tweet object and send back
-        let tweets = null;
-        res.send(body).status(200);
+        let tweets = util.scrapeArr(util.tweetFields, body);
+        res.send(tweets).status(200);
       })      
     }
   })
