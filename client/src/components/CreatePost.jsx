@@ -24,6 +24,8 @@ class CreatePost extends React.Component {
     this.setCaption = this.setCaption.bind(this);
     this.setPost = this.setPost.bind(this);
     this.setUrl = this.setUrl.bind(this);
+    this.resetForm = this.resetForm.bind(this);
+
   }
 
   handlePublishClick() {
@@ -34,15 +36,7 @@ class CreatePost extends React.Component {
       userId: localStorage.userId
     })
       .then(response => {
-        console.log('Post successfully published on social media', response.data);
-        //reset client fields once user successfully publishes post on social media
-        this.setState({
-          caption: '',
-          post: '',
-          url: '',
-          date: null,
-          showPicker: false
-        }, this.props.history.push('/feed'));
+        this.resetForm();
       })
       .catch(err => {
         console.log('unable to send post to FB/Twitter');
@@ -59,19 +53,21 @@ class CreatePost extends React.Component {
       userId: localStorage.userId
     })
       .then(response => {
-        console.log('Post successfully saved to DB', response.data);
-        //reset client fields once user successfully saves post on DB
-        this.setState({
-          caption: '',
-          post: '',
-          url: '',
-          date: null,
-          showPicker: false
-        }, this.props.history.push('/feed'));
+        this.resetForm();
       })
       .catch(err => {
         console.log('unable to save post to DB');
       })
+  }
+
+  resetForm() {
+    this.setState({
+      caption: '',
+      post: '',
+      url: '',
+      date: null,
+      showPicker: false
+    }, this.props.history.push('/feed'));
   }
 
   handleDateChange(newDate) {
