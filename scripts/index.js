@@ -1,5 +1,7 @@
 const db = require('../database/index');
 const moment = require('moment');
+const twitter = require('../../utility/passport/twitter.js');
+const request = require('request');
 
 exports.publishTweets = () => db.selectAll((err, results, fields) => {
   if (err) {
@@ -9,6 +11,30 @@ exports.publishTweets = () => db.selectAll((err, results, fields) => {
     const fifteenMinsAgo = moment().subtract(15, 'minutes');
     results = results.rows.filter(t => moment(t.post_date, 'YYYY-MM-DDTHH:mm:ss').isAfter(fifteenMinsAgo));
     console.log('posts are ready to be published-->', results)
-    //publish array of tweets in results
+    const publishThisPost = results[0];
+    let userId = req.body.userId;
+    let oauth = twitter.oauth;
+    let qs = {
+      status: `${publishThisPost.caption}  ${publishThisPost.post}  ${publishThisPost.url}`
+    }
+    db.retrieveTokens(userId, (err, results) => {
+      if (err) {
+        console.log('Database/Server Error on retrieveTokens: ', err);
+      } else {
+        oauth.token = results && results.rows ? results.rows[0].twitter_token : null;
+        oauth.token_secret = results && results.rows ? results.rows[0].twitter_token_secret : null;
+        request.post({
+          url: `https://api.twitter.com/1.1/statuses/update.json`,
+          oauth: oauth,
+          qs: qs
+        }, (error, response, body) => {
+          console.log('Used twitter oauth headers: ', oauth);
+          console.log('Used qs: ', qs);
+          console.log('ERROR: ', error);
+          console.log('Body: ', body);
+          res.send().status(200);
+        })
+      }
+    })
   }
 });
