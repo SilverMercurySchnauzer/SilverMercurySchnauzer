@@ -1,7 +1,7 @@
 import React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-const LoadingScreen = (props) => {
+const LoadingScreen = props => {
   return (
     <div>
       <CircularProgress className='loading-animation' />

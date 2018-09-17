@@ -28,25 +28,13 @@ class Signup extends React.Component {
     });
   }
 
-  setUser(e) {
-    this.setState({
-      username: e.target.value
-    })
-  }
-
-  setPassword(e) {
-    this.setState({
-      password: e.target.value
-    })
-  }
-
+  
   handleSignUp() {
     axios.post('api/signup', {
       username: this.state.username,
       password: this.state.password
     })
     .then(response => {
-      console.log('New user added! response from server-->', response.data.message);
       this.resetForm();
       this.props.history.push('/feed');
     })
@@ -60,6 +48,18 @@ class Signup extends React.Component {
       username: '',
       password: ''
     });
+  }
+
+  setUser(e) {
+    this.setState({
+      username: e.target.value
+    })
+  }
+
+  setPassword(e) {
+    this.setState({
+      password: e.target.value
+    })
   }
 
   render() {
