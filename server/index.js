@@ -11,7 +11,11 @@ const db = require('../database/index.js');
 const CronJob = require('cron').CronJob
 const { publishTweets } = require('../scripts/index')
 
-//change minutes to 15 (right now set to 1 minute for testing)
+// ***************************************************************
+// see below for helpful getting started guide to cron jobs
+// https://scotch.io/tutorials/nodejs-cron-jobs-by-examples
+// ***************************************************************
+
 const job = new CronJob('*/1 * * * *', () => {
   publishTweets();
 });

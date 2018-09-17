@@ -1,17 +1,10 @@
 const router = require('express').Router();
 const jwt = require('jsonwebtoken');
 const oauth = require('./oauth.js');
-const { saveUser } = require('../../database/index');
-const { validateUser } = require('../../database/index');
+const { saveUser, validateUser } = require('../../database/index');
 
 // oauth routes
 router.use('/oauth', oauth);
-
-// router.get('/login', (req, res) => {
-//   res.status(200).json({
-//     message: 'connected /api/authenticate GET'
-//   });
-// });
 
 router.post('/login', (req, res) => {
   const { username, password } = req.body;
@@ -36,12 +29,6 @@ router.post('/login', (req, res) => {
     }
   })
 });
-
-// router.get('/signup', (req, res) => {
-//   res.status(200).json({
-//     message: 'connected /api/signup GET'
-//   });
-// });
 
 router.post('/signup', (req, res) => {
   const { username, password } = req.body;
