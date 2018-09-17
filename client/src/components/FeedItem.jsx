@@ -43,6 +43,7 @@ class FeedItem extends React.Component {
           <Typography paragraph variant='body2' style={{ marginLeft: '15px', marginTop: '5px', marginBottom: '5px', width: '80%' }}>
             {this.state.item.text}
           </Typography>
+          <br />
           <Typography paragraph variant='body2' style={{ marginLeft: '15px', marginTop: '5px', marginBottom: '5px', width: '80%' }}>
             {'Retweets: ' + this.state.item.retweet_count + ' Favorites: ' + this.state.item.favorite_count}
           </Typography>
