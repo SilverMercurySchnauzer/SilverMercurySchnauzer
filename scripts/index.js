@@ -15,7 +15,7 @@ exports.publishTweets = () => db.selectAll((err, results, fields) => {
     let userId = publishThisPost.user_id;
     let oauth = twitter.oauth;
     let qs = {
-      status: `${publishThisPost.caption}  ${publishThisPost.post}  ${publishThisPost.url}`
+      status: `${publishThisPost.caption}  ${publishThisPost.text}  ${publishThisPost.media_url}`
     }
     db.retrieveTokens(userId, (err, results) => {
       if (err) {
@@ -32,7 +32,6 @@ exports.publishTweets = () => db.selectAll((err, results, fields) => {
           console.log('Used qs: ', qs);
           console.log('ERROR: ', error);
           console.log('Body: ', body);
-          res.send().status(200);
         })
       }
     })
