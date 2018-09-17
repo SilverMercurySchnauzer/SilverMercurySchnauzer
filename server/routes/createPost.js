@@ -34,8 +34,8 @@ router.post('/publish', (req, res) => {
     if (err) {
       console.log('Database/Server Error on retrieveTokens: ', err);
     } else {
-      oauth.token = results.rows[0].twitter_token; 
-      oauth.token_secret = results.rows[0].twitter_token_secret;
+      oauth.token = results && results.rows ? results.rows[0].twitter_token : null; 
+      oauth.token_secret = results && results.rows ? results.rows[0].twitter_token_secret : null;
       request.post({
         url:`https://api.twitter.com/1.1/statuses/update.json`, 
         oauth: oauth, 
