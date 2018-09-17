@@ -10,7 +10,7 @@ class Feed extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [1, 2, 3, 4, 5],
+      feedData: [],
       authenticated: false,
       loading: true,
       hasMounted: false,
@@ -34,7 +34,7 @@ class Feed extends React.Component {
       nativeToken: localStorage.getItem('token'),
       userId: localStorage.getItem('userId')
     })
-      .then((validationStatus) => {
+      .then(validationStatus => {
         if (validationStatus.data === 'fullyAuthenticated') {
           this.setState({
             authenticated: true,
@@ -51,7 +51,7 @@ class Feed extends React.Component {
     axios.get(`/api/home/updateTwitterFeed/${localStorage.getItem('userId')}`)
       .then((tweets) => {
         this.setState({
-          items: tweets.data,
+          feedData: tweets.data,
           loading: false
         });
       })
@@ -71,7 +71,7 @@ class Feed extends React.Component {
           <div>
             <NavBar />
             <div className='social-media-posts-container' style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
-              {this.state.items.map((tweet, i) => <FeedItem key={i} tweet={tweet} />)}
+              {this.state.feedData.map((tweet, i) => <FeedItem key={i} tweet={tweet} />)}
             </div>
           </div>
         );

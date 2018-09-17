@@ -11,7 +11,6 @@ class FeedItem extends React.Component {
       item: this.props.tweet,
       expanded: false
     };
-    console.log('tweet: ', this.state.item);
     this.handleExpandClick = this.handleExpandClick.bind(this);
   }
 
