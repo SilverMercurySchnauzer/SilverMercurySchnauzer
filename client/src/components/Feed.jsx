@@ -71,7 +71,6 @@ class Feed extends React.Component {
           <div>
             <NavBar />
             <div className='social-media-posts-container' style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
-              <h1>Social Media Content</h1>
               {this.state.items.map((tweet, i) => <FeedItem key={i} tweet={tweet} />)}
             </div>
           </div>
