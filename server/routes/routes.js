@@ -70,9 +70,10 @@ router.get('/home/updateTwitterFeed/:userId', (req, res) => {
       oauth.token = results.rows[0].twitter_token; 
       oauth.token_secret = results.rows[0].twitter_token_secret;
       request.get({url:`https://api.twitter.com/1.1/statuses/user_timeline.json`, oauth: oauth}, (error, response, body) => {
+        console.log(body);
         // pull out required info from each tweet object and send back
-        let tweets = util.scrapeArr(util.tweetFields, body);
-        res.send(tweets).status(200);
+        // let tweets = util.scrapeArr(util.tweetFields, body);
+        res.send(body).status(200);
       })      
     }
   })
