@@ -1,6 +1,6 @@
 const db = require('../database/index');
 const moment = require('moment');
-const twitter = require('../../utility/passport/twitter.js');
+const twitter = require('../utility/passport/twitter.js');
 const request = require('request');
 
 exports.publishTweets = () => db.selectAll((err, results, fields) => {
