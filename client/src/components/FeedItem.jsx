@@ -40,7 +40,7 @@ class FeedItem extends React.Component {
             subheader={this.state.item.created_at}
             
           />
-          <Typography paragraph variant="body2">
+          <Typography paragraph variant="body2" style={{ marginLeft: '15px', marginTop: '5px', marginBottom: '5px', width: '80%' }}>
             {this.state.item.text}
           </Typography>
           {/* <CardMedia
