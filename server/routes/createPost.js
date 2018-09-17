@@ -41,8 +41,9 @@ router.post('/publish', (req, res) => {
         oauth: oauth, 
         qs: qs
       }, (error, response, body) => {
-        console.log('Used twitter oauth headers: ', twitter.oauth);
-        console.log('ERROR: ', e);
+        console.log('Used twitter oauth headers: ', oauth);
+        console.log('Used qs: ', qs);
+        console.log('ERROR: ', error);
         console.log('Body: ', body);
         res.send().status(200);
       })      
