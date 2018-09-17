@@ -39,7 +39,7 @@ function scrapeArr (fieldNames, inputArr) {
 }
 
 module.exports = {
-  tweetFields: tweetFields;
-  scrapeObj: scrapeObj;
-  scrapeArr: scrapeArr;
+  tweetFields: tweetFields,
+  scrapeObj: scrapeObj,
+  scrapeArr: scrapeArr
 }
