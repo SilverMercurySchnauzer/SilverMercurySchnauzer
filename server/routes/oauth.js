@@ -10,12 +10,36 @@ router.get('/', (req, res) => {
   });
 });
 
-router.get('/twitter', passport.authenticate('twitter'));
+router.get('/twitter/:userID', function (req, res, next) {
+  // console.log('req.session.state: ', req.session.state);
+  // console.log('\n\ntwitter login req.params.userID: ', req.params.userID);
+  if(req.params.userID !== 'authenticatedCallback'){
+    req.session.state = req.params.userID;
+  }
+  // console.log('\n\ntwitter login session.state #1: ', req.session.state);
+  passport.authenticate('twitter', {session: false})(req, res, next)
+});
+
 
 router.get('/twitter/authenticatedCallback', 
-  passport.authenticate('twitter', { failureRedirect: '/'}),
+  passport.authenticate('twitter', { session: false, failureRedirect: '/' }),
   function(req, res) {
-    res.send();
+    // console.log('\n\ntwitter login session.state #2: ', req.session.state);
+    let userID = req.session.state;
+    // console.log('\n\nuserID: ', userID);
+    updateToken( userID, 
+      { 'provider': 'twitter', 
+        'token': twitter.oauth.token, 
+        'secret': twitter.oauth.token_secret
+      }, (err, result) => {
+        if (err) {
+          console.log('Error while updating twitter tokens: ', err);
+        } else {
+          console.log('Results of twitter tokens update: ', result);
+        }
+      } 
+    );
+    res.redirect('/');
   }
 );
 
