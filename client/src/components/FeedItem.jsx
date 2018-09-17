@@ -38,7 +38,11 @@ class FeedItem extends React.Component {
             }
             title={`@${this.state.item.user.screen_name}`}
             subheader={this.state.item.created_at}
+            
           />
+          <Typography paragraph variant="body2">
+            {this.state.item.text}
+          </Typography>
           {/* <CardMedia
             style={{height: '100px', width: '100px', marginLeft: '30px'}}
             image="https://thumbs.dreamstime.com/z/retro-bicycle-nature-background-autumn-49743173.jpg"
