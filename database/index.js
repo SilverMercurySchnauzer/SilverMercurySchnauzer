@@ -84,3 +84,27 @@ exports.checkOauthTokens = (userId, callback) => {
     }
   });
 };
+
+exports.updateToken = (userId, tokenObj, callback) => {
+  let queryString;
+  if(tokenObj.provider === 'twitter') {
+    queryString = `INSERT INTO 
+    tokens (user_id, ${tokenObj.provider}_token, ${tokenObj.provider}_token_secret) 
+    values ('${userId}', '${tokenObj.token}', '${tokenObj.secret}')`;
+  } else if (tokenObj.provider === 'facebook' || tokenObj.provider === 'instagram') {
+    queryString = `INSERT INTO 
+    tokens (user_id, ${tokenObj.provider}_token) 
+    values ('${userId}', ${tokenObj.token})`;
+  } else {
+    console.log('Invalid token provider');
+    callback('Invalid token provider', null);
+  }
+  pool.query(queryString, function(err, results) {
+    if (err) {
+      console.log('Database Error on updateToken: ', err);
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  })
+}

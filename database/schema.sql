@@ -10,6 +10,7 @@ CREATE TABLE tokens
   id SERIAL PRIMARY KEY,
   user_id INT,
   twitter_token TEXT,
+  twitter_token_secret TEXT,
   facebook_token TEXT,
   instagram_token TEXT
 );
@@ -18,7 +19,7 @@ CREATE TABLE posts
 (
   id SERIAL PRIMARY KEY,
   user_id INT,
-  caption,
+  caption TEXT,
   text TEXT,
   media_url TEXT,
   media_pic BYTEA,
