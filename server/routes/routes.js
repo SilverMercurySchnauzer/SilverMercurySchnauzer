@@ -9,6 +9,7 @@ require('dotenv').config();
 const session = require('express-session');
 const request = require('request');
 const debug = require('./debug.js');
+const { retrieveTokens } = require('../../database/index');
 
 passport.use(twitter.strat);
 router.use('/createpost', createPost);
@@ -61,13 +62,13 @@ router.get('/home', (req, res) => {
 router.get('/home/updateTwitterFeed/:userId', (req, res) => {
   let userId = req.params.userId;
   let oauth = twitter.oauth;
-  db.retrieveTokens(userId, function (err, results) => {
+  retrieveTokens(userId, function (err, results) => {
     if (err) {
       console.log('Database/Server Error on retrieveTokens: ', err);
     } else {
       console.log(results);
       oauth.token = results.data.rows[0].twitter_token; 
-      oauth.token_secret = results.data.rows[0]twitter_token_secret;
+      oauth.token_secret = results.data.rows[0].twitter_token_secret;
       request.get({url:`https://api.twitter.com/1.1/statuses/user_timeline.json`, oauth: oauth}, (error, response, body) => {
         // pull out required info from each tweet object and send back
         let tweets = null;
