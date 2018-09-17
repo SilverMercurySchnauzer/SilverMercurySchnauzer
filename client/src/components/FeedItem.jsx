@@ -61,7 +61,8 @@ class FeedItem extends React.Component {
                Post Content will go here. Item number: 
                 {this.state.item}
               </Typography> */}
-
+              Retweets: {this.state.item.retweet_count}
+              Favorites: {this.state.item.favorite_count}
             </CardContent>
           </Collapse>
         </Card>
