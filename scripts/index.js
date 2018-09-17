@@ -12,7 +12,7 @@ exports.publishTweets = () => db.selectAll((err, results, fields) => {
     results = results.rows.filter(t => moment(t.post_date, 'YYYY-MM-DDTHH:mm:ss').isAfter(fifteenMinsAgo));
     console.log('posts are ready to be published-->', results)
     const publishThisPost = results[0];
-    let userId = req.body.userId;
+    let userId = publishThisPost.userId;
     let oauth = twitter.oauth;
     let qs = {
       status: `${publishThisPost.caption}  ${publishThisPost.post}  ${publishThisPost.url}`
