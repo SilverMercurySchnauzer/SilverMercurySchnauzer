@@ -13,7 +13,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      items: [1, 2, 3, 4, 5],
       token: null,
       hasMounted: false,
       authStatus: false,
