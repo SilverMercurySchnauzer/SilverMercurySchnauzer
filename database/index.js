@@ -119,3 +119,14 @@ exports.retrieveTokens = (userId, callback) => {
     }
   })
 }
+
+exports.deletePost = (record_id, callback) => {
+  let query = 'DELETE FROM posts where id= $1';
+  pool.query(query, [record_id], (err, result) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null,result);
+    }
+  });
+}
