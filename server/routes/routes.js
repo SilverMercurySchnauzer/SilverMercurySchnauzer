@@ -92,7 +92,7 @@ router.get('/home/updateTwitterFeed/:userId', (req, res) => {
         // console.log(body);
         // pull out required info from each tweet object and send back
         let tweets = scrapeArr(util.tweetFields, JSON.parse(body));
-        res.send(body).status(200);
+        res.send(tweets).status(200);
       })      
     }
   })
