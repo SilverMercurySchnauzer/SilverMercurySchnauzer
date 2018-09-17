@@ -19,7 +19,7 @@ const pool = new Pool({
 
 
 exports.selectAll = callback => {
-  pool.query('SELECT * FROM items', (err, results, fields) => {
+  pool.query('SELECT * FROM posts', (err, results, fields) => {
     if (err) {
       callback(err, null);
     } else {

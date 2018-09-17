@@ -8,6 +8,15 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 const session = require('express-session');
 const db = require('../database/index.js');
+const CronJob = require('cron').CronJob
+const { publishTweets } = require('../scripts/index')
+
+//change minutes to 15 (right now set to 1 minute for testing)
+const job = new CronJob('*/1 * * * *', () => {
+  publishTweets();
+});
+
+job.start();
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
