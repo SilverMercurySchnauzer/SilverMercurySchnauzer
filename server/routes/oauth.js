@@ -36,9 +36,26 @@ router.get('/twitter/:userID', (req, res, next) => {
   passport.authenticate('twitter', {session: false})(req, res, next);
 });
 
+// router.get('/facebook/authenticatedCallback', 
+//   passport.authenticate('facebook', { failureRedirect: '/'}),
+//   function(req, res) {    
+//     res.redirect('/');
+//   }
+// );
 router.get('/facebook/authenticatedCallback', 
-  passport.authenticate('facebook', { failureRedirect: '/'}),
-  function(req, res) {    
+  passport.authenticate('twitter', { session: false, failureRedirect: '/' }),
+  (req, res) => {
+    let userID = req.session.state;
+    
+    updateToken( userID, 
+      { 'provider': 'facebook', 
+        'token': facebook.oauth.accessToken
+      }, (err, result) => {
+        if (err) {
+          console.log('Error while updating twitter tokens: ', err);
+        }
+      } 
+    );
     res.redirect('/');
   }
 );
