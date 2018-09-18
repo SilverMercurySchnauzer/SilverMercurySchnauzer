@@ -12,17 +12,9 @@ const facebook = new FacebookStrategy(
     clientSecret: process.env.fbClientSecret,
     callbackURL: `https://${process.env.herokuAppName}/api/oauth/facebook/authenticatedCallback`
   },
-  (accessToken, refreshToken, profile, done) => {
+  (accessToken, _refreshToken, profile, done) => {
     fbOauth.accessToken = accessToken;
-    console.log('returned accessToken: ', accessToken);
-    console.log('saved accessToken: ', fbOauth.accessToken);
-    console.log('\n\n');
-    fbOauth.refreshToken = refreshToken;
-    console.log('returned refreshToken: ', refreshToken);
-    console.log('saved refreshToken: ', fbOauth.refreshToken);
     facebookProfile.userData = profile;
-    console.log('profile: ', profile);
-    console.log('facebookProfile: ', facebookProfile);
     return done(null, profile);
   }
 );
