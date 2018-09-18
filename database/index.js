@@ -87,7 +87,7 @@ exports.updateToken = (userId, tokenObj, callback) => {
     INSERT INTO tokens 
       (user_id, ${tokenObj.provider}_token) 
     VALUES 
-      ('${userId}', ${tokenObj.token})`;
+      ('${userId}', '${tokenObj.token}')`;
   } else {
     console.log('Invalid token provider');
     callback('Invalid token provider', null);
