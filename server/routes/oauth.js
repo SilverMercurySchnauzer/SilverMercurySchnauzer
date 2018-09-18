@@ -43,7 +43,7 @@ router.get('/twitter/:userID', (req, res, next) => {
 //   }
 // );
 router.get('/facebook/authenticatedCallback', 
-  passport.authenticate('twitter', { session: false, failureRedirect: '/' }),
+  passport.authenticate('facebook', { session: false, failureRedirect: '/' }),
   (req, res) => {
     let userID = req.session.state;
     
