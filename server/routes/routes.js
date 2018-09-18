@@ -9,6 +9,7 @@ const { retrieveTokens } = require('../../database/index');
 const util = require('../../utility/index');
 
 passport.use(twitter.strat);
+passport.use(facebook.strat);
 router.use('/createpost', createPost);
 router.use('/', authenticate);
 
