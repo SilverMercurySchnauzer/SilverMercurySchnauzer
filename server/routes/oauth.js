@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const passport = require('passport');
 const twitter = require('../../utility/passport/twitter');
+const facebook = require('../../utility/passport/facebook');
 const { updateToken } = require('../../database/index');
 
 router.get('/', (req, res) => {
@@ -35,16 +36,13 @@ router.get('/twitter/:userID', (req, res, next) => {
   passport.authenticate('twitter', {session: false})(req, res, next);
 });
 
-router.get('/facebook', (req, res) => {
-  res.status(200).json({
-    message: 'connected /oauth/facebook GET'
-  });
-});
+router.get('/facebook/', passport.authenticate('facebook'));
 
-router.post('/facebook/authenticatedCallback', (req, res) => {
-  res.status(200).json({
-    message: 'connected /oauth/facebook/authenticatedCallback POST'
-  });
-});
+router.get('/facebook/authenticatedCallback', 
+  passport.authenticate('facebook', { failureRedirect: '/'}),
+  function(req, res) {    
+    res.redirect('/');
+  }
+);
 
 module.exports = router;

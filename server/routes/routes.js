@@ -1,9 +1,10 @@
 const router = require('express').Router();
+const passport = require('passport');
+const request = require('request');
 const authenticate = require('./authenticate.js');
 const createPost = require('./createPost.js');
 const twitter = require('../../utility/passport/twitter');
-const passport = require('passport');
-const request = require('request');
+const facebook = require('../../utility/passport/facebook');
 const { retrieveTokens } = require('../../database/index');
 const util = require('../../utility/index');
 

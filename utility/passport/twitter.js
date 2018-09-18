@@ -1,13 +1,13 @@
 const TwitterStrategy = require('passport-twitter').Strategy;
 
-let twitterProfile = {};
-let twOauth = 
-{ 
+const twitterProfile = {};
+const twOauth = {
   consumer_key: `${process.env.twConsumerKey}`,
   consumer_secret: `${process.env.twConsumerSecret}`
 };
 
-const twitter = new TwitterStrategy({
+const twitter = new TwitterStrategy(
+  {
     consumerKey: process.env.twConsumerKey,
     consumerSecret: process.env.twConsumerSecret,
     callbackURL: `https://${process.env.herokuAppName}/api/oauth/twitter/authenticatedCallback`
@@ -21,7 +21,7 @@ const twitter = new TwitterStrategy({
 );
 
 module.exports = {
-    strat: twitter,
-    oauth: twOauth,
-    userData: twitterProfile.userData
-}
+  strat: twitter,
+  oauth: twOauth,
+  userData: twitterProfile.userData
+};

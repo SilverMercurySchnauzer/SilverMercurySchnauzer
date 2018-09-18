@@ -23,7 +23,8 @@ const Oauth = (props) => {
           variant="contained" 
           size="small" 
           className='login-btn' 
-          color='primary' 
+          color='primary'
+          href={`/api/oauth/facebook/${localStorage.getItem('userId')}`}  
           value='facebook-login' 
           style={{ margin: '15px' }}
         >
