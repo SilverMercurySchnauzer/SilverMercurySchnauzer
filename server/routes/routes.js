@@ -4,14 +4,12 @@ const createPost = require('./createPost.js');
 const twitter = require('../../utility/passport/twitter');
 const passport = require('passport');
 const request = require('request');
-const debug = require('./debug.js');
 const { retrieveTokens } = require('../../database/index');
 const util = require('../../utility/index');
 
 passport.use(twitter.strat);
 router.use('/createpost', createPost);
 router.use('/', authenticate);
-router.use('/debug', debug);
 
 router.get('/', (req, res) => {
   res.status(200).json({message: 'connected / GET'});
