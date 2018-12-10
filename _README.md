@@ -1,4 +1,4 @@
-# Sketchpad Ninja
+# Tweet Time
 
 Twitter content management and scheduling platform
 
